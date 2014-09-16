@@ -1,0 +1,15 @@
+footer {
+	padding-top: 10px;
+	width: 100%;
+	color: rgb(58, 35, 21);
+	position: relative;
+}
+
+.phone-link{
+	color:inherit
+}
+
+.phone-link:hover{
+	text-decoration:none;
+	color:inherit
+}

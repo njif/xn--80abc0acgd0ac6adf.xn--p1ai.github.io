@@ -1,0 +1,56 @@
+section.goods-catalog {
+	background-color: #ffffff;
+}
+.goods-catalog__header {
+	font: normal normal normal 32px 'Impact Regular', sans-serif;
+	color: rgb(58, 35, 21);	
+}
+
+.goods-catalog__item {
+	margin-bottom: 30px;
+}
+
+.goods-catalog__item a:hover {
+	text-decoration: none;
+}
+
+.goods-catalog__item .item-name {
+	margin-top: -10px;
+	overflow: hidden;
+}
+
+.goods-catalog__item .item-name__main {
+	background-color: #d9534f;
+	color: #fff;
+	padding: 5px;
+	font-weight: bold;
+	height: 30px;
+	text-overflow: ellipsis;
+	display: inline-block;
+	white-space:nowrap;
+	overflow: hidden;
+}
+
+.goods-catalog__item .item-name__second {
+	font-family: 'NinaCTT Normal', 'Impact Regular', sans-serif;
+	color: #fff;
+	background-color: #f0ad4e;
+	padding: 5px;
+	height: 30px;
+	display: inline-block;
+	text-overflow: ellipsis;
+	white-space:nowrap;
+	overflow: hidden;
+}
+
+.goods-catalog__item .item-price {
+	font-family: 'NinaCTT Normal', 'Impact Regular', sans-serif;
+	color: rgb(51, 51, 51);
+	font-weight: bold;
+	font-size: 15px;
+}
+
+.goods-catalog__item .item-price__old {
+	color: gray;
+	text-decoration: line-through;
+}

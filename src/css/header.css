@@ -1,0 +1,17 @@
+.navbar-brand {
+	font-family: impact, sans-serif;
+	font-size: 32px;
+	text-transform: uppercase;
+}
+
+.navbar-brand__first {
+	color: #f0ad4e; /* TODO LESS: @brand-primary */ 
+}
+
+.navbar-brand__second {
+	color:  #428bca; /* TODO LESS: @brand-primary */ 
+}
+
+.navbar-brand__last {
+	color: #ffffff;
+}

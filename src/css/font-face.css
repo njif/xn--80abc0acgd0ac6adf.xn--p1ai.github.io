@@ -1,0 +1,17 @@
+@font-face {
+    font-family: 'NinaCTT Normal';
+    src: url('fonts/NinaCTT-Normal/NinaCTT-Normal.eot');/* IE9 Compat Modes *//* IE9 Compat Modes */
+    src: url('fonts/NinaCTT-Normal/NinaCTT-Normal.eot?#iefix') format('embedded-opentype'),  /* IE6-IE8 */
+        url('fonts/NinaCTT-Normal/NinaCTT-Normal.woff') format('woff'), /* Modern Browsers */
+        url('fonts/NinaCTT-Normal/NinaCTT-Normal.ttf') format('truetype'), /* Safari, Android, iOS */
+        url('fonts/NinaCTT-Normal/NinaCTT-Normal.svg#NinaCTT-Normal') format('svg'); /* Legacy iOS */
+}
+
+@font-face {
+    font-family: 'Impact Regular';
+    src: url('fonts/Impact-Regular/Impact-Regular.eot');
+    src: url('fonts/Impact-Regular/Impact-Regular.eot?#iefix') format('embedded-opentype'),
+        url('fonts/Impact-Regular/Impact-Regular.woff') format('woff'),
+        url('fonts/Impact-Regular/Impact-Regular.ttf') format('truetype'),
+        url('fonts/Impact-Regular/Impact-Regular.svg#Impact-Regular') format('svg');
+}

@@ -1,0 +1,108 @@
+.jumbotron {
+	border: none;
+	margin-bottom: 0;
+	background: #fff url('../img/jumbotron/jumbotron-bg.png') repeat;
+}
+
+/* Jumbotron slogan */
+
+.jumbotron-slogan {
+	position: relative;	
+}
+
+.jumbotron button {
+	border-radius: 0;
+}
+
+.jumbotron-slogan h1 {
+	font-family: 'Impact Regular', sans-serif;
+	font-size: 42px;
+	line-height: 42px;
+	margin-top: 40px;
+	margin-bottom: 20px;
+	color: #2d6ca2;
+	text-transform: uppercase;
+}
+
+.jumbotron-slogan h2 {
+	display: none;
+	position: absolute;
+	right: 0;
+	width: 180px;
+	font-family: 'NinaCTT Normal', 'Impact Regular', sans-serif;
+	font-size: 15px;
+	color: #2d6ca2;
+	z-index: 0;
+}
+
+/* Jumbotron slider */
+
+.jumbotron-slider__topline {
+	background-color: #ffffff;
+	z-index: 100;
+}
+
+.jumbotron-slider__topline:before {
+	content: "";
+	background-color: #ffffff;
+	background: #ffffff url('../img/jumbotron/jumbotron-bg.png') 0 170px repeat;
+	position: absolute;
+	width: 100%;
+	margin-left: -50%;
+	min-height: 20%;
+	z-index: -1;
+}
+
+/* Media queries */
+
+@media (min-width: 630px) {
+	.jumbotron-slogan h2 {
+		display: block;
+		right: -25px;
+	}
+
+	.jumbotron-slider__topline:before {
+		min-height: 25%;
+	}
+}
+
+@media (min-width: 768px) {
+	.jumbotron-slogan h1 {
+	font-size: 45px;
+	line-height: 45px;
+	margin-top: 30px;
+	}
+	.jumbotron-slogan h2 {
+		right: 10px;
+		font-size: 16px;
+	}
+	.jumbotron-slider__topline:before {
+		min-height: 30%;
+	}
+}
+@media (min-width: 992px) {
+	.jumbotron-slogan h1 {
+		font-size: 55px;
+		line-height: 1.4em;
+	}
+	.jumbotron-slogan h2 {
+		right: 30px;
+		font-size: 18px;
+	}
+	.jumbotron-slider__topline:before {
+		min-height: 40%;
+	}
+}
+@media (min-width: 1200px) {
+	.jumbotron-slogan h1 {
+		font-size: 55px;
+		line-height: 1.4em;
+	}
+	.jumbotron-slogan h2 {
+		right: 100px;
+		font-size: 20px;
+	}
+	.jumbotron-slider__topline:before {
+		min-height: 45%;
+	}
+}
