@@ -90,7 +90,7 @@ function processHtml() {
 	gulp.src('src/index.html')
 		.pipe(plumber())
 		.pipe(processhtml('index.html'))
-		.pipe(gulp.dest('./'))
+		.pipe(gulp.dest('./dist'))
 		.pipe(connect.reload())
 		.pipe(notify('Html processed!'));	
 };
