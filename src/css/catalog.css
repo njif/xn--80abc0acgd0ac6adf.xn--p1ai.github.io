@@ -1,10 +1,6 @@
 section.goods-catalog {
 	background-color: #ffffff;
 }
-.goods-catalog__header {
-	font: normal normal normal 32px 'Impact Regular', sans-serif;
-	color: rgb(58, 35, 21);	
-}
 
 .goods-catalog__item {
 	margin-bottom: 30px;
