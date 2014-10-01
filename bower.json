@@ -1,0 +1,22 @@
+{
+  "name": "tvoykotbasik.rf",
+  "version": "0.2.0",
+  "homepage": "https://github.com/njif/xn--80abc0acgd0ac6adf.xn--p1ai.github.io",
+  "authors": [
+    "Anton Seroshtan <anton.seroshtan@gmail.com>"
+  ],
+  "description": "tvoykotbasik.rf website",
+  "main": "index.html",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "1.11.1"
+  }
+}

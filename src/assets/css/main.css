@@ -1,0 +1,221 @@
+/* --------- mixins 		--------- */
+/* MIXINS */
+.inlineblock {
+  display: inline-block;
+  vertical-align: top;
+  zoom: 1 !ie;
+  display: inline !ie;
+}
+.clearfix {
+  *zoom: expression(this.runtimeStyle.zoom='1', this.appendChild(document.createElement('br')).style.cssText='clear:both;font:0/0 serif');
+  zoom: 1 !ie;
+}
+.clearfix:before,
+.clearfix:after {
+  content: "";
+  display: table;
+}
+.clearfix:after {
+  clear: both;
+}
+/* --------- font-faces		--------- */
+@font-face {
+  font-family: 'NinaCTT Normal';
+  src: url('fonts/NinaCTT-Normal/NinaCTT-Normal.eot');
+  src: url('fonts/NinaCTT-Normal/NinaCTT-Normal.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */ url('fonts/NinaCTT-Normal/NinaCTT-Normal.woff') format('woff'), /* Modern Browsers */ url('fonts/NinaCTT-Normal/NinaCTT-Normal.ttf') format('truetype'), /* Safari, Android, iOS */ url('fonts/NinaCTT-Normal/NinaCTT-Normal.svg#NinaCTT-Normal') format('svg');
+  
+  /* IE9 Compat Modes */
+  /* IE9 Compat Modes */
+  /* Legacy iOS */
+}
+@font-face {
+  font-family: 'Impact Regular';
+  src: url('fonts/Impact-Regular/Impact-Regular.eot');
+  src: url('fonts/Impact-Regular/Impact-Regular.eot?#iefix') format('embedded-opentype'), url('fonts/Impact-Regular/Impact-Regular.woff') format('woff'), url('fonts/Impact-Regular/Impact-Regular.ttf') format('truetype'), url('fonts/Impact-Regular/Impact-Regular.svg#Impact-Regular') format('svg');
+}
+/* --------- adjustments --------- */
+/* --------- common styles --------- */
+body {
+  background: url('../img/carton-bg.png') repeat;
+}
+.section__header {
+  font: normal normal normal 32px 'Impact Regular', sans-serif;
+  color: #3a2315;
+}
+/* --------- section styles --------- */
+.navbar-brand {
+  font-family: 'Impact Regular', impact, sans-serif;
+  font-size: 32px;
+  text-transform: uppercase;
+}
+.navbar-brand__first {
+  color: #f0ad4e;
+  /* TODO LESS: @brand-primary */
+}
+.navbar-brand__second {
+  color: #428bca;
+  /* TODO LESS: @brand-primary */
+}
+.navbar-brand__last {
+  color: #ffffff;
+}
+.jumbotron {
+  border: none;
+  margin-bottom: 0;
+  background: #ffffff url('../img/jumbotron/jumbotron-bg.png') repeat;
+}
+/* Jumbotron slogan */
+.jumbotron-slogan {
+  position: relative;
+}
+.jumbotron button {
+  border-radius: 0;
+}
+.jumbotron-slogan h1 {
+  font-family: 'Impact Regular', sans-serif;
+  font-size: 42px;
+  line-height: 42px;
+  margin-top: 40px;
+  margin-bottom: 20px;
+  color: #2d6ca2;
+  text-transform: uppercase;
+}
+.jumbotron-slogan h2 {
+  display: none;
+  position: absolute;
+  right: 0;
+  width: 180px;
+  font-family: 'NinaCTT Normal', 'Impact Regular', sans-serif;
+  font-size: 15px;
+  color: #2d6ca2;
+  z-index: 0;
+}
+/* Jumbotron slider */
+.jumbotron-slider__topline {
+  background-color: #ffffff;
+  z-index: 100;
+}
+.jumbotron-slider__topline:before {
+  content: "";
+  background-color: #ffffff;
+  background: #ffffff url('../img/jumbotron/jumbotron-bg.png') 0 170px repeat;
+  position: absolute;
+  width: 100%;
+  margin-left: -50%;
+  min-height: 20%;
+  z-index: -1;
+}
+/* Media queries */
+@media (min-width: 630px) {
+  .jumbotron-slogan h2 {
+    display: block;
+    right: -25px;
+  }
+  .jumbotron-slider__topline:before {
+    min-height: 25%;
+  }
+}
+@media (min-width: 768px) {
+  .jumbotron-slogan h1 {
+    font-size: 45px;
+    line-height: 45px;
+    margin-top: 30px;
+  }
+  .jumbotron-slogan h2 {
+    right: 10px;
+    font-size: 16px;
+  }
+  .jumbotron-slider__topline:before {
+    min-height: 30%;
+  }
+}
+@media (min-width: 992px) {
+  .jumbotron-slogan h1 {
+    font-size: 55px;
+    line-height: 1.4em;
+  }
+  .jumbotron-slogan h2 {
+    right: 30px;
+    font-size: 18px;
+  }
+  .jumbotron-slider__topline:before {
+    min-height: 40%;
+  }
+}
+@media (min-width: 1200px) {
+  .jumbotron-slogan h1 {
+    font-size: 55px;
+    line-height: 1.4em;
+  }
+  .jumbotron-slogan h2 {
+    right: 100px;
+    font-size: 20px;
+  }
+  .jumbotron-slider__topline:before {
+    min-height: 45%;
+  }
+}
+.description {
+  background-color: #ffffff;
+}
+.benifits {
+  background-color: #ffffff;
+}
+section.goods-catalog {
+  background-color: #ffffff;
+}
+.goods-catalog__item {
+  margin-bottom: 30px;
+}
+.goods-catalog__item a:hover {
+  text-decoration: none;
+}
+.goods-catalog__item .item-name {
+  margin-top: -10px;
+  overflow: hidden;
+}
+.goods-catalog__item .item-name__main {
+  background-color: #d9534f;
+  color: #fff;
+  padding: 5px;
+  font-weight: bold;
+  height: 30px;
+  text-overflow: ellipsis;
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.goods-catalog__item .item-name__second {
+  font-family: 'NinaCTT Normal', 'Impact Regular', sans-serif;
+  color: #fff;
+  background-color: #f0ad4e;
+  padding: 5px;
+  height: 30px;
+  display: inline-block;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.goods-catalog__item .item-price {
+  font-family: 'NinaCTT Normal', 'Impact Regular', sans-serif;
+  color: #333333;
+  font-weight: bold;
+  font-size: 15px;
+}
+.goods-catalog__item .item-price__old {
+  color: gray;
+  text-decoration: line-through;
+}
+footer {
+  padding-top: 10px;
+  width: 100%;
+  color: #3a2315;
+  position: relative;
+}
+.phone-link {
+  color: inherit;
+}
+.phone-link:hover {
+  text-decoration: none;
+  color: inherit;
+}
