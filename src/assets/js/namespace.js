@@ -1,0 +1,1 @@
+window.basik = window.basik || {};
