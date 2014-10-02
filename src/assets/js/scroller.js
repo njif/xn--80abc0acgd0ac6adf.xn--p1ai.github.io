@@ -44,7 +44,7 @@
 
 			if (activePage.siblings('.page__section').length > 0) {
 				screen++;
-				jheader.addClass('small');
+				//jheader.addClass('small');
 			}
 
 		} else {
@@ -54,7 +54,7 @@
 			}
 			
 			if (screen === 0) {
-				jheader.removeClass('small');
+				//jheader.removeClass('small');
 			}
 		}
 
