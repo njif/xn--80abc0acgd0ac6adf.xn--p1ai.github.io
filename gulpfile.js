@@ -38,13 +38,58 @@ var gulp = require('gulp'),
 
 var config = {
 	image: {
-		minimize: true // https://github.com/sindresorhus/gulp-imagemin
+		minimize: true, // https://github.com/sindresorhus/gulp-imagemin,
+		source: 'src/assets/img/**/*.*',
+		dest: 'assets/img'
 	},
 	css: {
 		minify: false 	// TODO: DO NOT WORK WITH MIXIN
 						//.inlineblock (display: inline-block removed after minification).
 						// NEED SOME FIX!
 	},
+	fonts: {
+		source: 'src/assets/css/fonts/**/*.*',
+		dest: 'assets/css/fonts'
+	},
+	// config.js
+	js: {
+		// config.js.bundles
+		bundles: {
+			// config.js.bundles.dependency
+			dependency: {
+				// config.js.bundles.dependency.files
+				files: {
+					jquery: 	'bower_components/jquery/dist/jquery.js',
+					mousewheel: 'node_modules/jquery-mousewheel/jquery.mousewheel.js'				
+				},
+				// config.js.bundles.dependency.dest
+				dest: 'src/assets/js',
+				// config.js.bundles.dependency.bundleName
+				bundleName: 'dependency.min.js'
+			},
+			// config.js.bundles.development
+			development: {
+				// config.js.bundles.development.filesArr
+				filesArr: [
+					'src/assets/js/namespace.js',
+					'src/assets/js/jstools.js',
+					'src/assets/js/scroller.js',
+					'src/assets/js/eventlist.js',
+					'src/assets/js/state.js',					
+					'src/assets/js/controls/popup.goodsitem.js',
+					'src/assets/js/controls/popup.request-callback.js',
+					'src/assets/js/controls/button.js',
+					'src/assets/js/app.js',
+					'src/assets/js/main.js'
+				],
+				// config.js.bundles.development.dest
+				dest: 'assets/js',
+				// config.js.bundles.development.bundleName
+				bundleName: 'app.min.js'
+			}		
+		}
+	},
+
 	server: {
 		copy: true, // Copy to local server
 		path: 'c:/WebServers/home/localhost/basik'
@@ -72,11 +117,11 @@ gulp.task('processStyles', ['buildLess', 'processCss']); // async: first, build 
 gulp.task('buildLess', buildLess);
 gulp.task('processCss', ['buildLess'], processCss);
 
-gulp.task('prepareProject', ['processImages', 'copyFonts', 'copyVendorsJs', 'copyVendorsCss', 'copyFavicon']);
+gulp.task('prepareProject', ['processImages', 'copyFonts', 'copyJsDependency', 'copyCssDependency', 'copyFavicon']);
 gulp.task('processImages', processImages);
 gulp.task('copyFonts', copyFonts);
-gulp.task('copyVendorsJs', copyVendorsJs);
-gulp.task('copyVendorsCss', copyVendorsCss);
+gulp.task('copyJsDependency', copyJsDependency);
+gulp.task('copyCssDependency', copyCssDependency);
 
 gulp.task('copyFavicon', copyFavicon);
 
@@ -88,7 +133,7 @@ gulp.task('watchCss', watchCss);
 gulp.task('watchLess', watchLess);
 gulp.task('watchJs', watchJs);
 gulp.task('watchFavicon', watchFavicon);
-gulp.task('watchVendorJs', watchVendorJs);
+gulp.task('watchJsDependency', watchJsDependency);
 gulp.task('watchVendorCss', watchVendorCss);
 
 /********************************
@@ -132,7 +177,6 @@ function processHtml() {
 		.pipe(gulpif(config.server.copy, gulp.dest(config.server.path)))
 		.pipe(notify(getNotifySettings('Processed html')))
 		.pipe(connect.reload());
-
 }
 
 function buildLess() {
@@ -167,48 +211,41 @@ function processCss() {
 
 function processJs() {
 
-	gulp.src([
-			'src/assets/js/plugins/jquery.mousewheel.js',
-			'src/assets/js/namespace.js',
-			'src/assets/js/plugins/jstools.js',
-			'src/assets/js/plugin/slider.js',
-			'src/assets/js/app.js',
-			'src/assets/js/main.js'
-		]).pipe(plumber())
+	// jshint for development files
+
+	var bundles = config.js.bundles;
+
+	gulp.src(bundles.development.filesArr).pipe(plumber())
 		.pipe(jshint())
 		.pipe(jshint.reporter(stylish));
 
-	
-	gulp.src([
-			'src/vendors/jquery/js/jquery-1.11.1.min.js',
-			'src/vendors/bootstrap/js/bootstrap.min.js',
-			'src/assets/js/plugins/jquery.mousewheel.js',
-			'src/assets/js/namespace.js',
-			'src/assets/js/plugins/jstools.js',
-			'src/assets/js/plugin/slider.js',
-			'src/assets/js/app.js',
-			'src/assets/js/main.js'
-		]).pipe(plumber())
+	// concat dependency and development javascript files into one bundle than
+	// copy it to the destination folder and to the local server if needed.
+
+	gulp.src([ bundles.dependency.dest + '/' + bundles.dependency.bundleName ].concat(bundles.development.filesArr))
+		.pipe(plumber())
 		.pipe(uglify())
-		.pipe(concat('app.min.js'))
+		.pipe(concat(bundles.development.bundleName))
 		.pipe(header(banner, { pkg : pkg } ))
-		.pipe(gulp.dest('assets/js'))
-		.pipe(gulpif(config.server.copy, gulp.dest(config.server.path + '/assets/js')))
+		.pipe(gulp.dest(bundles.development.dest))
+		.pipe(gulpif(config.server.copy, gulp.dest(config.server.path + '/' + bundles.development.dest)))
 		.pipe(notify(getNotifyDetailedSettings('Processed js')))
 		.pipe(connect.reload());
+
 }
 
 function processImages() {
-	gulp.src('src/assets/img/**/*.*')
+
+	gulp.src(config.image.source)
 		.pipe(plumber())
-		.pipe(gulp.dest('assets/img'))
+		.pipe(gulp.dest(config.image.dest))
 		.pipe(gulpif(config.image.minimize, imagemin({
 			progressive: true,
 			svgoPlugins: [{removeViewBox: false}],
 			use: [pngcrush()]
 		})))
-		.pipe(gulpif(config.image.minimize, gulp.dest('assets/img')))
-		.pipe(gulpif(config.server.copy, gulp.dest(config.server.path + '/assets/img')))
+		.pipe(gulpif(config.image.minimize, gulp.dest(config.image.dest)))
+		.pipe(gulpif(config.server.copy, gulp.dest(config.server.path + '/' + config.image.dest)))
 		.pipe(notify(getNotifyDetailedSettings('Processed Images')))
 		.pipe(connect.reload());
 }
@@ -216,29 +253,37 @@ function processImages() {
 /* Copy only tasks */
 
 function copyFonts() {
-	gulp.src('src/assets/css/fonts/**/*.*')
+
+	gulp.src(config.fonts.source)
 		.pipe(plumber())
-		.pipe(gulp.dest('assets/css/fonts'))
-		.pipe(gulpif(config.server.copy, gulp.dest(config.server.path + '/assets/css/fonts')))
+		.pipe(gulp.dest(config.fonts.dest))
+		.pipe(gulpif(config.server.copy, gulp.dest(config.server.path + '/' + config.fonts.dest)))
 		.pipe(notify(getNotifySettings('Copied Fonts')))
 		.pipe(connect.reload());
 }
 
-function copyVendorsJs() {
+function copyJsDependency() {
 
-	gulp.src(['node_modules/jquery-mousewheel/jquery.mousewheel.js'])
-		.pipe(gulp.dest('src/assets/js/plugins/'))
-		.pipe(gulpif(config.server.copy, gulp.dest(config.server.path + '/src/assets/js/plugins/')))
-		.pipe(notify(getNotifyDetailedSettings('Copied plugins js')));
+	var dependency = config.js.bundles.dependency;
 
-	gulp.src(['bower_components/jquery/dist/jquery.js'])
-		.pipe(gulp.dest('src/assets/js/vendors/'))
-		.pipe(gulpif(config.server.copy, gulp.dest(config.server.path + '/assets/js/vendors/')))
-		.pipe(notify(getNotifySettings('Copied vendors js')))
-		.pipe(connect.reload());
+	gulp.src([
+				dependency.files.jquery,
+				dependency.files.mousewheel
+			])
+		.pipe(uglify())
+		.pipe(concat(dependency.bundleName))
+		.pipe(gulp.dest(dependency.dest))
+		.pipe(gulpif(config.server.copy, gulp.dest(config.server.path + '/' + dependency.dest)))
+		.pipe(notify(getNotifyDetailedSettings('Copied javascript dependencies')));
+
 }
 
-function copyVendorsCss() {
+function copyCssDependency() {
+
+	gulp.src(['src/assets/css/style-ie7.css'])
+		.pipe(gulp.dest('assets/css/'))
+		.pipe(gulpif(config.server.copy, gulp.dest(config.server.path + '/assets/css/')))
+		.pipe(notify(getNotifySettings('Copied style-ie7.css')));
 
 	gulp.src([
 		'node_modules/normalize.less/node_modules/normalize.css/normalize.css',
@@ -247,12 +292,7 @@ function copyVendorsCss() {
 		])
 		.pipe(gulp.dest('src/assets/css/vendors/'))
 		.pipe(gulpif(config.server.copy, gulp.dest(config.server.path + 'src/assets/css/vendors/')))
-		.pipe(notify(getNotifyDetailedSettings('Copied vendors css')));
-
-	gulp.src(['src/assets/js/vendor/*.js'])
-		.pipe(gulp.dest('js/vendor'))
-		.pipe(gulpif(config.server.copy, gulp.dest(config.server.path + '/assets/js/vendor')))
-		.pipe(notify(getNotifySettings('Copied vendor js')))
+		.pipe(notify(getNotifyDetailedSettings('Copied vendors css')))
 		.pipe(connect.reload());
 }
 
@@ -286,12 +326,17 @@ function watchCss() {
 	gulp.watch('src/assets/css/*.css', ['processCss']);
 }
 
-function watchVendorJs() {
-	gulp.watch('src/assets/js/vendor/*.js', ['copyVendorsJs']);
+function watchJsDependency() {
+
+	var dependency = config.js.bundles.dependency;
+	gulp.watch([
+		dependency.files.jquery,
+		dependency.files.mousewheel
+	], ['copyJsDependency']);
 }
 
 function watchVendorCss() {
-	gulp.watch('src/assets/js/vendor/*.js', ['copyVendorsCss']);
+	gulp.watch('src/assets/js/vendor/*.js', ['copyCssDependency']);
 }
 
 function watchFavicon() {
@@ -303,7 +348,7 @@ function watchJs() {
 }
 
 function watch() {
-	gulp.run(['watchHtml', 'watchImages', 'watchFonts', 'watchCss', 'watchJs', 'watchVendorJs', 'watchVendorCss', 'watchFavicon', 'watchLess']);
+	gulp.run(['watchHtml', 'watchImages', 'watchFonts', 'watchCss', 'watchJs', 'watchJsDependency', 'watchVendorCss', 'watchFavicon', 'watchLess']);
 }
 
 function notifyChanges(event){
