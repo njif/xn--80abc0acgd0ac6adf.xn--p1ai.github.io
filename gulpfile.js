@@ -59,8 +59,11 @@ var config = {
 			dependency: {
 				// config.js.bundles.dependency.files
 				files: {
-					jquery: 	'bower_components/jquery/dist/jquery.js',
-					mousewheel: 'node_modules/jquery-mousewheel/jquery.mousewheel.js'				
+					jquery: 		'bower_components/jquery/dist/jquery.js',
+					slimscroll: 	'bower_components/fullpage.js/vendors/jquery.slimscroll.min.js',
+					easings: 		'bower_components/fullpage.js/vendors/jquery.easings.min.js',
+					fullPage: 		'bower_components/fullpage.js/jquery.fullPage.js',
+					mousewheel: 	'node_modules/jquery-mousewheel/jquery.mousewheel.js'				
 				},
 				// config.js.bundles.dependency.dest
 				dest: 'src/assets/js',
@@ -193,6 +196,7 @@ function processCss() {
 			'src/assets/css/vendors/normalize.css',
 			'src/assets/css/vendors/bootstrap.css',
 			'src/assets/css/vendors/bootstrap-theme.css',
+			'src/assets/css/vendors/jquery.fullPage.css',
 			'src/assets/css/main.css'
 		]).pipe(plumber())
 		.pipe(autoprefixer({
@@ -268,6 +272,9 @@ function copyJsDependency() {
 
 	gulp.src([
 				dependency.files.jquery,
+				dependency.files.easings,
+				dependency.files.slimscroll,
+				dependency.files.fullPage,
 				dependency.files.mousewheel
 			])
 		.pipe(uglify())
@@ -288,7 +295,8 @@ function copyCssDependency() {
 	gulp.src([
 		'node_modules/normalize.less/node_modules/normalize.css/normalize.css',
 		'node_modules/bootstrap/dist/css/bootstrap.css',
-		'node_modules/bootstrap/dist/css/bootstrap-theme.css'
+		'node_modules/bootstrap/dist/css/bootstrap-theme.css',
+		'bower_components/fullpage.js/jquery.fullPage.css'
 		])
 		.pipe(gulp.dest('src/assets/css/vendors/'))
 		.pipe(gulpif(config.server.copy, gulp.dest(config.server.path + 'src/assets/css/vendors/')))
@@ -330,8 +338,11 @@ function watchJsDependency() {
 
 	var dependency = config.js.bundles.dependency;
 	gulp.watch([
-		dependency.files.jquery,
-		dependency.files.mousewheel
+				dependency.files.jquery,
+				dependency.files.easings,
+				dependency.files.slimscroll,
+				dependency.files.fullPage,
+				dependency.files.mousewheel
 	], ['copyJsDependency']);
 }
 

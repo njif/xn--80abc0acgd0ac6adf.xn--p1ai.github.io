@@ -18,5 +18,8 @@
   ],
   "dependencies": {
     "jquery": "1.11.1"
+  },
+  "devDependencies": {
+    "fullpage.js": "~2.2.1"
   }
 }
