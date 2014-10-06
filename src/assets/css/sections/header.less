@@ -1,7 +1,17 @@
+.navbar__header {
+	width: 100%;
+}
+
 .navbar-brand {
 	font-family: 'Impact Regular', impact, sans-serif;
-	font-size: 32px;
+	font-size: 28px;
 	text-transform: uppercase;
+}
+
+@media (min-width: 340px) {
+	.navbar-brand {
+		font-size: 32px;
+	}
 }
 
 .navbar-brand__first {
@@ -14,4 +24,27 @@
 
 .navbar-brand__last {
 	color: #ffffff;
+}
+
+.navbar__header-button {
+	position: relative;
+	float: right;
+	margin-top: 8px;
+	margin-right: 15px;
+	margin-bottom: 8px;
+	background-color: transparent;
+	background-image: none;
+	border: 1px solid transparent;
+	border-radius: 4px;
+	padding: 0 3px 0 3px;
+
+	span {
+		color: #ffffff;
+		font-size: 26px;
+		line-height: 26px;
+	}
+
+	&:focus {
+		outline: 0;
+	}
 }
