@@ -66,8 +66,39 @@
 			<div class="jumbotron-slider text-center">
 				<div class="jumbotron-slider__topline">
 				</div>
-				<div class="header-slider-header container">
-					<img src="assets/img/jumbotron/sharfik.png" class="img-responsive img" alt="Басик и клеточка">
+				<div class="container">					
+					<div class="slider__container">
+						<ul class="slider__list">
+							<li class="slider__item active"><img src="assets/img/jumbotron/sharfik.png" class="img-responsive img" alt="Басик и клеточка"></li>
+							<li class="slider__item">
+								<div class="description__content">
+									<div class="description__pic col-xs-8 col-md-3">
+										<img src="assets/img/300x375/basik_znachok.jpg" class="img-responsive img" alt="">
+									</div>
+
+									<div class="description__text  col-xs-4 col-md-9">
+										Знакомьтесь - это <span class="highlight">кот Басик</span></div>				
+									
+								</div>
+							</li>
+							<li class="slider__item">
+								<div class="description__content">
+									<div class="description__pic  col-xs-12 col-md-5">
+										<img src="assets/img/250x250/basik_podushka_myshka.jpg" class="img-responsive img" alt="">
+									</div>
+
+									<div class="description__text  col-xs-12 col-md-7">
+										<span class="highlight">Басик</span> обожает обниматься, мурлыкать на коленках и спать на подушке:-)
+									</div>				
+									
+								</div>
+							</li>
+						</ul>
+						<div class="slider__controls">
+							<a href="#" class="slider__controls-button slider__controls-button_prev"><</a>
+							<a href="#" class="slider__controls-button slider__controls-button_next">></a>
+						</div>
+					</div>
 				</div>						
 			</div>
 
@@ -76,7 +107,7 @@
 				<div class="container">
 					<h2 class="section__header text-center">О Басике:</h2>
 					<div class="description__content">
-						<div class="description__pic  col-xs-12 col-md-5">
+						<div class="description__pic col-xs-12 col-md-5">
 							<img src="assets/img/250x250/basik_podushka_myshka.jpg" class="img-responsive img" alt="">
 						</div>
 
@@ -239,6 +270,100 @@
 	<script src="assets/js/controls/button.js"></script>
 	<script src="assets/js/app.js"></script>
 	<script src="assets/js/main.js"></script>
+	<script>
+		var slider = (function () {
+
+			
+
+			function init(holder) {
+
+				injectSpacer(holder);
+				attachEvents(holder);
+			}
+
+			function attachEvents(holder) {
+				holder.find('.slider__controls-button').on('click', function(e) {
+					e.preventDefault();
+
+					var $this = $(this),
+						slides = $this.closest('.slider__container').find('.slider__item:not(.item__spacer)'),
+						activeSlide = slides.filter('.active'),
+						nextSlide = activeSlide.next(':not(.item__spacer)'),
+						prevSlide = activeSlide.prev(':not(.item__spacer)'),
+						firstSlide = slides.first(),
+						lastSlide = slides.last();
+
+					if ($this.hasClass('slider__controls-button_next')) {
+						if (nextSlide.length) {
+							moveSlide(nextSlide, 'forward');
+						} else {
+							moveSlide(firstSlide, 'forward');
+						}
+						
+					} else {
+
+						if (prevSlide.length) {
+							moveSlide(prevSlide, 'backward');
+						} else {
+							moveSlide(lastSlide, 'backward');
+						}
+					}
+				})
+			}
+
+			function injectSpacer(holder) {
+				var items = holder.find('.slider__item'),
+					firstItem = items.first();
+					firstSlideClone = items.first().clone().removeClass('active').addClass('item__spacer');
+				items.last().after(firstSlideClone);
+
+			}
+
+			function moveSlide(slide, direction) {
+				var
+					container = slide.closest('.slider__container'),
+					slides = container.find('.slider__item:not(.item__spacer)'),
+					activeSlide = slides.filter('.active'),
+					slideWidth = slides.width(),
+					duration = 500,
+					reqCssPosition = 0,
+					reqSlideStrafe = 0;
+
+				if (direction === 'forward') {
+					reqCssPosition =  slideWidth;
+					reqSlideStrafe = -slideWidth;
+				} else if (direction === 'backward') {
+					reqCssPosition =  -slideWidth;
+					reqSlideStrafe = slideWidth;
+				}
+
+				slide.css('left', reqCssPosition).addClass('inslide');
+
+				var movableSlide = slides.filter('.inslide');
+				activeSlide.animate({ left: reqSlideStrafe }, duration);
+				movableSlide.animate({ left: 0 }, duration, function() {
+
+						var $this = $(this);
+						slides.css('left', '0').removeClass('active');
+						$this.toggleClass('inslide active');
+
+				});
+
+			}
+
+			return {
+				init: init,
+				moveSlide: moveSlide
+			}
+		}());
+
+		$(document).ready(function() {
+
+			var holder = $('.slider__container');
+			if (holder.length)
+				slider.init(holder);
+		});
+	</script>
 	<!--/build -->
 	<!-- /scripts -->
 </body>
