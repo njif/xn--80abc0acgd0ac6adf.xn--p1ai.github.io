@@ -14,6 +14,7 @@
 	<link rel="stylesheet" href="assets/css/vendors/normalize.css">
 	<link rel="stylesheet" href="assets/css/vendors/bootstrap.css">
 	<link rel="stylesheet" href="assets/css/vendors/bootstrap-theme.css">
+	<link rel="stylesheet" href="assets/css/vendors/jquery.fullPage.css">
 	<link rel="stylesheet" href="assets/css/main.css">
 	<!--/build-->
 
@@ -39,24 +40,15 @@
 			<!-- navbar -->
 			<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 				<div class="container">
-					<!-- TODO: implement later -->
-
 					<!--navbar-header -->
-					<div class="navbar-header">
-						<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-							<span class="sr-only">Меню</span>
-							<span class="icon-bar"></span>
-							<span class="icon-bar"></span>
-							<span class="icon-bar"></span>
+					<div class="navbar__header">
+						<button type="button" class="navbar__header-button">
+							<span class="button-icon icon-cart3"></span>
+							<span class="button-text hidden-xs">Корзина</span>
 						</button>
 						<a class="navbar-brand" href="#"><span class="navbar-brand__first">Твой кот</span><span class="navbar-brand__second"> - </span><span class="navbar-brand__last">Басик</span></a>
 					</div>
 					<!--/navbar-header -->
-
-					<!--navbar-collapse -->
-					<div class="navbar-collapse collapse">
-					</div>
-					<!--/navbar-collapse -->
 				</div>
 			</div>
 			<!-- /navbar -->
@@ -71,69 +63,18 @@
 			</section>
 			<!-- /main jumbotron -->
 			
-			<!-- main jumbotron -->
-			<section class="jumbotron-slider text-center">
+			<div class="jumbotron-slider text-center">
 				<div class="jumbotron-slider__topline">
 				</div>
-				<div class="header-slider-header container">
-					<img src="assets/img/jumbotron/sharfik.png" class="img-responsive img" alt="Басик и клеточка">
-				</div>						
-			</section>
-			<!-- /main slider -->
-
-			<!-- description -->
-			<section class="page__section description">
-				<div class="container">
-					<h2 class="section__header text-center">О Басике:</h2>
-					<div class="description__content">
-						<div class="description__pic  col-xs-12 col-md-5">
-							<img src="assets/img/250x250/basik_podushka_myshka.jpg" class="img-responsive img" alt="">
-						</div>
-
-						<div class="description__text  col-xs-12 col-md-7">
-							<p>
-								Знакомьтесь - это <span class="highlight">кот Басик</span>. Более общительного, игривого и ласкового котика вы никогда ещё не встречали! Басик обожает обниматься, мурлыкать на коленках и спать на подушке:-) А еще Басик очень любит наряжаться в разные костюмы и играть в игрушки.
-							</p>
-							<p>
-								<span class="highlight">Басику</span> нужна весёлая семья, этот котик не даст вам соскучиться ни на минуту, он во всём найдёт для себя развлечение :-D а ещё он очень дружелюбный. Так что, если вы давно искали себе такого замечательного плюшевого друга, давайте знакомиться!
-							</p>
-							<p>
-								Живет <span class="highlight">Басик</span> в очень уютной картонной коробке с круглыми дырками (для свежего воздуха) и красивым коричневым бантом на крышке.
-							</p>
-						</div>				
-						
+				<div class="container">					
+					<div class="slider__container">
+						<ul class="slider__list">
+							<li class="slider__item active"><img src="assets/img/jumbotron/sharfik0.png" class="img-responsive img" alt="Басик и клеточка">
+							</li>
+						</ul>
 					</div>
-					
-				</div>
-			</section>
-			<!-- /description -->
-
-			<!-- benifits -->
-			<section class="page__section benifits">
-				<div class="container">
-					<h2 class="section__header section__header_benifits text-center">Преимущества:</h2>
-					<ul class="benefits__list-theses">
-						<li class="theses__item item-1">
-							<div class="item__title">Никакой линьки</div>
-							<div class="item__description">Никакой шерсти разбросанной по квартире - Басик изготовлен только из самых высококачественных материалов: искусственного меха, текстиля с включениями элементов пластмассы и металла (срок службы: 10 лет)</div>
-						</li>
-						<li class="theses__item item-2">
-							<div class="item__title">Никакой аллергии</div>
-							<div class="item__description">Все материалы гипоаллергенны, а качество и экологичность котиков подтверждены российским сертификатом соответствия. Вы можете быть уверены в безопасности игрушки для ребенка.</div>
-						</li>
-						<li class="theses__item item-3">
-							<div class="item__title">Никаких хлопот</div>
-							<div class="item__description">Басик очень спокойный и добрый котик. С ним у вас точно не будет хлопот: не появится лужи на коврике, а также вам 100% гарантирована сохранность дивана, штор и кожанного пальто. Самое страшное, что с ним может приключиться - запачкается =) Но вам даже не придется стирать его в ручную, так как это можно сделать в стиральной машине.</div>
-						</li>
-					</ul>
-					
-					<p>А самое главное - <span class="highlight">Басик</span> <span class="strong"> приносит радость</span>, вызывает положительные эмоции и рождает самые нежные и теплые чувства. Его приятно обнять, взять с собой в путешествие или просто уложить спать! Басик станет лучшим другом для вашего ребенка.</p>
-
-					<p><span class="strong">P.S.:</span> А еще, Басик - это наша отечественная игрушка от брендовой компании Буди Баса.</p>
-				
-				</div>
-			</section>
-			<!-- /benifits -->
+				</div>						
+			</div>
 
 			<!-- goods-catalog -->
 			<section class="page__section goods-catalog">
@@ -249,6 +190,100 @@
 	<script src="assets/js/controls/button.js"></script>
 	<script src="assets/js/app.js"></script>
 	<script src="assets/js/main.js"></script>
+	<script>
+		var slider = (function () {
+
+			
+
+			function init(holder) {
+
+				injectSpacer(holder);
+				attachEvents(holder);
+			}
+
+			function attachEvents(holder) {
+				holder.find('.slider__controls-button').on('click', function(e) {
+					e.preventDefault();
+
+					var $this = $(this),
+						slides = $this.closest('.slider__container').find('.slider__item:not(.item__spacer)'),
+						activeSlide = slides.filter('.active'),
+						nextSlide = activeSlide.next(':not(.item__spacer)'),
+						prevSlide = activeSlide.prev(':not(.item__spacer)'),
+						firstSlide = slides.first(),
+						lastSlide = slides.last();
+
+					if ($this.hasClass('slider__controls-button_next')) {
+						if (nextSlide.length) {
+							moveSlide(nextSlide, 'forward');
+						} else {
+							moveSlide(firstSlide, 'forward');
+						}
+						
+					} else {
+
+						if (prevSlide.length) {
+							moveSlide(prevSlide, 'backward');
+						} else {
+							moveSlide(lastSlide, 'backward');
+						}
+					}
+				})
+			}
+
+			function injectSpacer(holder) {
+				var items = holder.find('.slider__item'),
+					firstItem = items.first();
+					firstSlideClone = items.first().clone().removeClass('active').addClass('item__spacer');
+				items.last().after(firstSlideClone);
+
+			}
+
+			function moveSlide(slide, direction) {
+				var
+					container = slide.closest('.slider__container'),
+					slides = container.find('.slider__item:not(.item__spacer)'),
+					activeSlide = slides.filter('.active'),
+					slideWidth = slides.width(),
+					duration = 500,
+					reqCssPosition = 0,
+					reqSlideStrafe = 0;
+
+				if (direction === 'forward') {
+					reqCssPosition =  slideWidth;
+					reqSlideStrafe = -slideWidth;
+				} else if (direction === 'backward') {
+					reqCssPosition =  -slideWidth;
+					reqSlideStrafe = slideWidth;
+				}
+
+				slide.css('left', reqCssPosition).addClass('inslide');
+
+				var movableSlide = slides.filter('.inslide');
+				activeSlide.animate({ left: reqSlideStrafe }, duration);
+				movableSlide.animate({ left: 0 }, duration, function() {
+
+						var $this = $(this);
+						slides.css('left', '0').removeClass('active');
+						$this.toggleClass('inslide active');
+
+				});
+
+			}
+
+			return {
+				init: init,
+				moveSlide: moveSlide
+			}
+		}());
+
+		$(document).ready(function() {
+
+			var holder = $('.slider__container');
+			if (holder.length)
+				slider.init(holder);
+		});
+	</script>
 	<!--/build -->
 	<!-- /scripts -->
 </body>

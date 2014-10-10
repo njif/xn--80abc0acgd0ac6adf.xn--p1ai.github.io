@@ -20,18 +20,119 @@
 }
 /* --------- font-faces		--------- */
 @font-face {
-  font-family: 'NinaCTT Normal';
-  src: url('fonts/NinaCTT-Normal/NinaCTT-Normal.eot');
-  src: url('fonts/NinaCTT-Normal/NinaCTT-Normal.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */ url('fonts/NinaCTT-Normal/NinaCTT-Normal.woff') format('woff'), /* Modern Browsers */ url('fonts/NinaCTT-Normal/NinaCTT-Normal.ttf') format('truetype'), /* Safari, Android, iOS */ url('fonts/NinaCTT-Normal/NinaCTT-Normal.svg#NinaCTT-Normal') format('svg');
-  
-  /* IE9 Compat Modes */
-  /* IE9 Compat Modes */
-  /* Legacy iOS */
+  font-family: "NinaCTT Normal";
+  src: url("fonts/NinaCTT-Normal/NinaCTT-Normal.eot");
+  src: url("fonts/NinaCTT-Normal/NinaCTT-Normal.eot?#iefix") format("embedded-opentype"), url("fonts/NinaCTT-Normal/NinaCTT-Normal.woff") format("woff"), url("fonts/NinaCTT-Normal/NinaCTT-Normal.ttf") format("truetype"), url("fonts/NinaCTT-Normal/NinaCTT-Normal.svg#NinaCTT Normal") format("svg");
+  font-weight: normal;
+  font-style: normal;
 }
 @font-face {
-  font-family: 'Impact Regular';
-  src: url('fonts/Impact-Regular/Impact-Regular.eot');
-  src: url('fonts/Impact-Regular/Impact-Regular.eot?#iefix') format('embedded-opentype'), url('fonts/Impact-Regular/Impact-Regular.woff') format('woff'), url('fonts/Impact-Regular/Impact-Regular.ttf') format('truetype'), url('fonts/Impact-Regular/Impact-Regular.svg#Impact-Regular') format('svg');
+  font-family: "Impact Regular";
+  src: url("fonts/Impact-Regular/Impact-Regular.eot");
+  src: url("fonts/Impact-Regular/Impact-Regular.eot?#iefix") format("embedded-opentype"), url("fonts/Impact-Regular/Impact-Regular.woff") format("woff"), url("fonts/Impact-Regular/Impact-Regular.ttf") format("truetype"), url("fonts/Impact-Regular/Impact-Regular.svg#Impact Regular") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "IcoMoon";
+  src: url("fonts/IcoMoon/IcoMoon.eot");
+  src: url("fonts/IcoMoon/IcoMoon.eot?#iefix") format("embedded-opentype"), url("fonts/IcoMoon/IcoMoon.woff") format("woff"), url("fonts/IcoMoon/IcoMoon.ttf") format("truetype"), url("fonts/IcoMoon/IcoMoon.svg#IcoMoon") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+[class^="icon-"],
+[class*=" icon-"] {
+  font-family: 'IcoMoon';
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.icon-cart:before {
+  content: "\e606";
+}
+.icon-cart2:before {
+  content: "\e607";
+}
+.icon-images:before {
+  content: "\e600";
+}
+.icon-cart3:before {
+  content: "\e601";
+}
+.icon-phone:before {
+  content: "\e602";
+}
+.icon-envelope:before {
+  content: "\e603";
+}
+.icon-spinner:before {
+  content: "\e604";
+}
+.icon-phone2:before {
+  content: "\e608";
+}
+.icon-cart4:before {
+  content: "\e609";
+}
+.icon-book:before {
+  content: "\e60a";
+}
+.icon-gift:before {
+  content: "\e60b";
+}
+.icon-phone3:before {
+  content: "\e60c";
+}
+.icon-washingmachine:before {
+  content: "\e60d";
+}
+.icon-cube:before {
+  content: "\e60e";
+}
+.icon-box:before {
+  content: "\e60f";
+}
+.icon-box2:before {
+  content: "\e610";
+}
+.icon-abacus:before {
+  content: "\e611";
+}
+.icon-check:before {
+  content: "\f00c";
+}
+.icon-times:before {
+  content: "\f00d";
+}
+.icon-refresh:before {
+  content: "\f021";
+}
+.icon-arrow-left:before {
+  content: "\f060";
+}
+.icon-arrow-right:before {
+  content: "\f061";
+}
+.icon-arrow-up:before {
+  content: "\f062";
+}
+.icon-arrow-down:before {
+  content: "\f063";
+}
+.icon-gift2:before {
+  content: "\f06b";
+}
+.icon-paw:before {
+  content: "\f1b0";
+}
+.icon-cart22:before {
+  content: "\e605";
 }
 /* --------- adjustments --------- */
 /* --------- common styles --------- */
@@ -154,10 +255,18 @@ li {
   -o-transition: top 1s;
   transition: top 1s;
 }
+.navbar__header {
+  width: 100%;
+}
 .navbar-brand {
   font-family: 'Impact Regular', impact, sans-serif;
-  font-size: 32px;
+  font-size: 28px;
   text-transform: uppercase;
+}
+@media (min-width: 340px) {
+  .navbar-brand {
+    font-size: 32px;
+  }
 }
 .navbar-brand__first {
   color: #f0ad4e;
@@ -169,6 +278,26 @@ li {
 }
 .navbar-brand__last {
   color: #ffffff;
+}
+.navbar__header-button {
+  position: relative;
+  float: right;
+  margin-top: 8px;
+  margin-right: 15px;
+  margin-bottom: 8px;
+  background-color: transparent;
+  background-image: none;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  padding: 0 3px 0 3px;
+}
+.navbar__header-button span {
+  color: #ffffff;
+  font-size: 26px;
+  line-height: 26px;
+}
+.navbar__header-button:focus {
+  outline: 0;
 }
 .jumbotron {
   border: none;
@@ -216,7 +345,72 @@ li {
   min-height: 20%;
   z-index: -1;
 }
+/* slider */
+.slider__container {
+  width: 100%;
+  overflow: hidden;
+  display: inline-block;
+}
+.slider__list {
+  position: relative;
+  width: 100%;
+}
+.slider__item {
+  visibility: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  width: 100%;
+}
+.slider__item.item__spacer {
+  position: relative;
+  visibility: hidden;
+  z-index: 0;
+}
+.slider__item.active {
+  visibility: visible;
+  z-index: 1;
+}
+.slider__item img {
+  width: 100%;
+  display: block;
+}
+.slider__item.inslide {
+  z-index: 2;
+  visibility: visible;
+}
+.slider__controls-button {
+  text-decoration: none !important;
+  position: absolute;
+  top: 50%;
+  display: block;
+  z-index: 3;
+  font-size: 30px;
+  height: 50px;
+  -ms-text-align-last: center;
+  text-align: center;
+  width: 50px;
+  margin-top: -25px;
+  background: #000000;
+  text-decoration: none;
+  border-radius: 50%;
+  line-height: 50px;
+  color: #ffffff;
+  opacity: .6;
+}
+.slider__controls-button_prev {
+  left: 10px;
+}
+.slider__controls-button_next {
+  right: 10px;
+}
 /* Media queries */
+@media (min-width: 340px) {
+  .jumbotron-slogan {
+    font-size: 32px;
+  }
+}
 @media (min-width: 630px) {
   .jumbotron-slogan h2 {
     display: block;
@@ -274,6 +468,32 @@ li {
 }
 .benifits {
   background-color: #ffffff;
+}
+.benefits__list-theses .theses__item {
+  /* 		&.item-1, &.item-3 {
+	float: left;
+	width: 415px;
+	padding-top: 14px;
+	margin: 0px 0 55px 45px;
+	text-align: right;
+	.clearfix
+}
+
+&.item-2 {
+	float: right;
+	width: 448px;
+	padding-top: 14px;
+	margin: 145px 0 53px 0px;
+	text-align: left;
+	.clearfix
+}
+
+&.item-4,&.item-5 {
+	padding-top: 30px;
+	text-align: center;
+	display: inline-block;
+	margin: 35px 10% 0 10%;
+} */
 }
 .benefits__list-theses .item__title {
   font-weight: bold;

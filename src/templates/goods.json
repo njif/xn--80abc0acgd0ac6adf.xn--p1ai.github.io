@@ -1,0 +1,46 @@
+{
+	"items": [
+		{
+			"name": "Басик и клеточка",
+			"image": "assets/img/300x375/basik_sharf.jpg"
+			"second-name": "(Шарфик)",
+			"item-price": "от 990 руб",
+			"old-price": "от 1200 руб"
+		},
+		{
+			"name": "Басик и кораблик",
+			"image": "assets/img/300x375/basik_moryak.jpg"
+			"second-name": "(Кот-моряк)",
+			"item-price": "от 990 руб",
+			"old-price": "от 1200 руб"
+		},
+		{
+			"name": "Басик и крылья",
+			"image": "assets/img/300x375/basik_letchik.jpg"
+			"second-name": "(Кот-летчик)",
+			"item-price": "от 990 руб",
+			"old-price": "от 1200 руб"
+		},
+		{
+			"name": "Басик и клевая шапка-ушанка",
+			"image": "assets/img/300x375/basik_shapka.jpg"
+			"second-name": "(Шапка-ушанка)",
+			"item-price": "от 990 руб",
+			"old-price": "от 1200 руб"
+		},
+		{
+			"name": "Басик и котова медаль",
+			"image": "assets/img/300x375/basik_znachok.jpg"
+			"second-name": "(Значок)",
+			"item-price": "от 990 руб",
+			"old-price": "от 1200 руб"
+		},
+		{
+			"name": "Басик и кильки",
+			"image": "assets/img/300x375/basik_kilki.jpg"
+			"second-name": "(Рыбки-игрушки)",
+			"item-price": "от 990 руб",
+			"old-price": "от 1200 руб"
+		}
+	]
+}
