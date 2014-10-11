@@ -7,7 +7,6 @@
 	var BasikApp = function() {
 
 		this._state = null;
-		this._scroll = null;
 
 		this._controls = { buttons: { goods: null, item: null }, popups: { goodsitem: null } };
 
@@ -28,7 +27,6 @@
 		_createControls: function() {
 
 			// Controls creation here
-
 			this._createButtons();
 			this._createPopups();			
 		},
@@ -59,7 +57,6 @@
 			var menu = controls.menu;
 			var owner = this;
 			var popups = this._controls.popups;
-			var scroll = this._scroll;
 
 			state // subscribe to
 
@@ -69,9 +66,9 @@
 					popups.goodsitem.show(clickEvent);
 				})
 				.on('clicked:goods-catalog', function(clickEvent) {
-					popups.goodsitem.show(clickEvent);
-					// TODO: implement scrollTo
-					//scroll.scrollTo("#goods-catalog");
+					var scrollTop = $('.goods-catalog').offset().top - $('.navbar-fixed-top').height();
+					$("body").animate({ scrollTop: scrollTop }, 400, 'swing');
+					return false;
 				});
 		}
 	};
