@@ -1,8 +1,8 @@
-;(function (ns, $) {
+/*;(function (ns, $) {
 
 	return false;
 	
-	/* --- Variables --- */
+	// --- Variables --- //
 
 	var jbody, jheader,
 		screen = 0,
@@ -58,7 +58,7 @@
 
 	return;
 
-	/* --- Helper functions --- */
+	// --- Helper functions --- //
 
 	var isSwipeDown = function (event) {
 		if (!event)
@@ -109,7 +109,7 @@
 		pages.eq(screen).addClass('active').siblings().removeClass('active');
 	};
 
-	/* --- Setup --- */
+	// --- Setup --- //
 
 	jbody = $('body');
 	jheader = jbody.find('.maincontent:eq(0)');
@@ -119,7 +119,7 @@
 
 	$('.page__section:eq(0)').addClass('active');
 
-	/* --- Attach events --- */
+	// --- Attach events --- //
 
 	jbody.on('touchstart', function(event) {
 		var touch = event.originalEvent.touches[0] || event.originalEvent.changedTouches[0];
@@ -135,3 +135,4 @@
 
 }(window.basik || window, jQuery));
 
+*/

@@ -271,11 +271,11 @@ function copyJsDependency() {
 	var dependency = config.js.bundles.dependency;
 
 	gulp.src([
-				dependency.files.jquery,
+				dependency.files.jquery/*,
+				dependency.files.mousewheel,
 				dependency.files.easings,
 				dependency.files.slimscroll,
-				dependency.files.fullPage,
-				dependency.files.mousewheel
+				dependency.files.fullPage*/
 			])
 		.pipe(uglify())
 		.pipe(concat(dependency.bundleName))
@@ -295,8 +295,8 @@ function copyCssDependency() {
 	gulp.src([
 		'node_modules/normalize.less/node_modules/normalize.css/normalize.css',
 		'node_modules/bootstrap/dist/css/bootstrap.css',
-		'node_modules/bootstrap/dist/css/bootstrap-theme.css',
-		'bower_components/fullpage.js/jquery.fullPage.css'
+		'node_modules/bootstrap/dist/css/bootstrap-theme.css'/*,
+		'bower_components/fullpage.js/jquery.fullPage.css'*/
 		])
 		.pipe(gulp.dest('src/assets/css/vendors/'))
 		.pipe(gulpif(config.server.copy, gulp.dest(config.server.path + 'src/assets/css/vendors/')))
@@ -338,11 +338,11 @@ function watchJsDependency() {
 
 	var dependency = config.js.bundles.dependency;
 	gulp.watch([
-				dependency.files.jquery,
+				dependency.files.jquery/*,
 				dependency.files.easings,
 				dependency.files.slimscroll,
 				dependency.files.fullPage,
-				dependency.files.mousewheel
+				dependency.files.mousewheel*/
 	], ['copyJsDependency']);
 }
 
