@@ -83,6 +83,7 @@ var config = {
 					'src/assets/js/controls/popup.goodsitem.js',
 					'src/assets/js/controls/popup.request-callback.js',
 					'src/assets/js/controls/button.js',
+					'src/assets/js/goods-catalog.js',
 					'src/assets/js/app.js',
 					'src/assets/js/main.js'
 				],
