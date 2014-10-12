@@ -1,0 +1,67 @@
+{
+	"items": [
+		{
+			"alias": "basik_sharf",
+			"name": "Басик и клеточка",
+			"second-name": "Шарфик",
+			"variations": [
+				{ "size": 19, "price": 790, "old-price": 990 },
+				{ "size": 22, "price": 1010, "old-price": 1210 },
+				{ "size": 25, "price": 1330, "old-price": 1330 },
+				{ "size": 30, "price": 1430, "old-price": 1630 }
+			]
+		},
+		{
+			"alias": "basik_moryak",
+			"name": "Басик и кораблик",
+			"second-name": "Кот-моряк",
+			"variations": [
+				{ "size": 19, "price": 900, "old-price": 1100 },
+				{ "size": 22, "price": 1110, "old-price": 1310 },
+				{ "size": 25, "price": 1240, "old-price": 1440 },
+				{ "size": 30, "price": 1580, "old-price": 1780 }
+			]
+		},
+		{
+			"alias": "basik_letchik",
+			"name": "Басик и крылья",
+			"second-name": "Кот-летчик",
+			"variations": [
+				{ "size": 19, "price": 900, "old-price": 1100 },
+				{ "size": 22, "price": 1110, "old-price": 1310 },
+				{ "size": 25, "price": 1240, "old-price": 1440 },
+				{ "size": 30, "price": 1580, "old-price": 1780 }
+			]
+		},
+		{
+			"alias": "basik_shapka",
+			"name": "Басик и клевая шапка-ушанка",
+			"second-name": "Шапка-ушанка",
+			"variations": [
+				{ "size": 19, "price": 860, "old-price": 1060 },
+				{ "size": 22, "price": 1030, "old-price": 1230 },
+				{ "size": 25, "price": 1130, "old-price": 1330 },
+				{ "size": 30, "price": 1470, "old-price": 1670 }
+			]
+		},
+		{
+			"alias": "basik_znachok",
+			"name": "Басик и котова медаль",
+			"second-name": "Значок",
+			"variations": [
+				{ "size": 19, "price": 770, "old-price": 970 },
+				{ "size": 22, "price": 940, "old-price": 1140 },
+				{ "size": 25, "price": 1050, "old-price": 1250 },
+				{ "size": 30, "price": 1370, "old-price": 1570 }
+			]
+		},
+		{
+			"alias": "basik_kilki",
+			"name": "Басик и кильки",
+			"second-name": "Рыбки-игрушки",
+			"variations": [
+				{ "size": 30, "price": 1430, "old-price": 1630 }
+			]
+		}
+	]
+}
