@@ -60,6 +60,7 @@ var config = {
 				// config.js.bundles.dependency.files
 				files: {
 					jquery: 		'bower_components/jquery/dist/jquery.js',
+					handlebars: 	'bower_components/handlebars/handlebars.js',
 					slimscroll: 	'bower_components/fullpage.js/vendors/jquery.slimscroll.min.js',
 					easings: 		'bower_components/fullpage.js/vendors/jquery.easings.min.js',
 					fullPage: 		'bower_components/fullpage.js/jquery.fullPage.js',
@@ -271,7 +272,8 @@ function copyJsDependency() {
 	var dependency = config.js.bundles.dependency;
 
 	gulp.src([
-				dependency.files.jquery/*,
+				dependency.files.jquery,
+				dependency.files.handlebars/*,
 				dependency.files.mousewheel,
 				dependency.files.easings,
 				dependency.files.slimscroll,
@@ -295,7 +297,9 @@ function copyCssDependency() {
 	gulp.src([
 		'node_modules/normalize.less/node_modules/normalize.css/normalize.css',
 		'node_modules/bootstrap/dist/css/bootstrap.css',
-		'node_modules/bootstrap/dist/css/bootstrap-theme.css'/*,
+		'node_modules/bootstrap/dist/css/bootstrap-theme.css',
+		'node_modules/bootstrap/dist/css/bootstrap.css.map',
+		'node_modules/bootstrap/dist/css/bootstrap-theme.css.map'/*,
 		'bower_components/fullpage.js/jquery.fullPage.css'*/
 		])
 		.pipe(gulp.dest('src/assets/css/vendors/'))
@@ -338,7 +342,8 @@ function watchJsDependency() {
 
 	var dependency = config.js.bundles.dependency;
 	gulp.watch([
-				dependency.files.jquery/*,
+				dependency.files.jquery,
+				dependency.files.handlebars/*,
 				dependency.files.easings,
 				dependency.files.slimscroll,
 				dependency.files.fullPage,
