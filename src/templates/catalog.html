@@ -1,0 +1,15 @@
+<h2 class="section__header text-center">Выбери своего Басика:</h2>
+{{#each items}}
+<div class="goods-catalog__item col-xs-6 col-md-4">
+	<a class="catalog__item-link cc_catalog_item_link" href="#{{alias}}" data-itemid="{{alias}}">
+		<img src="{{image}}" class="img-responsive img">
+		<p class='item-name'>
+			<span class="item-name__main">{{name}}</span><span class="item-name__second">({{second-name}})</span>
+		</p>
+		<div class="item-price">
+			<span class="item-price__new">от {{min variations "price"}} руб</span>
+			<span class="item-price__old">от {{min variations "old-price"}} руб</span>
+		</div>
+	</a>
+</div>
+{{/each}}

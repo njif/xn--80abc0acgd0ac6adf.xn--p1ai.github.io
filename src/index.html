@@ -79,80 +79,8 @@
 			<!-- goods-catalog -->
 			<section class="page__section goods-catalog">
 				<div class="container">
-
-					<h2 class="section__header text-center">Выбери своего Басика:</h2>
-					
-					<div class="goods-catalog__item col-xs-6 col-md-4">
-						<a class="catalog__item-link cc_catalog_item_link" href="#basik_sharf" data-itemid="basik_sharf">
-							<img src="assets/img/300x375/basik_sharf.jpg" class="img-responsive img">
-							<p class='item-name'>
-								<span class="item-name__main">Басик и клеточка</span><span class="item-name__second">(Шарфик)</span>
-							</p>
-							<div class="item-price">
-								<span class="item-price__new">от 990 руб</span>
-								<span class="item-price__old">от 1200 руб</span>
-							</div>
-						</a>
-					</div>
-					<div class="goods-catalog__item col-xs-6 col-md-4">
-						<a class="catalog__item-link cc_catalog_item_link" href="#basik_moryak" data-itemid="basik_moryak">
-							<img src="assets/img/300x375/basik_moryak.jpg" class="img-responsive img">
-							<p class='item-name'>
-								<span class="item-name__main">Басик и кораблик</span><span class="item-name__second">(Кот-моряк)</span>
-							</p>
-							<div class="item-price">
-								<span class="item-price__new">от 990 руб</span>
-								<span class="item-price__old">от 1200 руб</span>
-							</div>
-						</a>
-					</div>
-					<div class="goods-catalog__item col-xs-6 col-md-4">
-						<a class="catalog__item-link cc_catalog_item_link" href="#basik_letchik" data-itemid="basik_letchik">
-							<img src="assets/img/300x375/basik_letchik.jpg" class="img-responsive img">
-							<p class='item-name'>
-								<span class="item-name__main">Басик и крылья</span><span class="item-name__second">(Кот-летчик)</span>
-							</p>
-							<div class="item-price">
-								<span class="item-price__new">от 990 руб</span>
-								<span class="item-price__old">от 1200 руб</span>
-							</div>
-						</a>
-					</div>
-					<div class="goods-catalog__item col-xs-6 col-md-4">
-						<a class="catalog__item-link cc_catalog_item_link" href="#basik_shapka" data-itemid="basik_shapka">
-							<img src="assets/img/300x375/basik_shapka.jpg" class="img-responsive img">
-							<p class='item-name'>
-								<span class="item-name__main">Басик и клевая шапка-ушанка</span><span class="item-name__second">(Шапка-ушанка)</span>
-							</p>
-							<div class="item-price">
-								<span class="item-price__new">от 990 руб</span>
-								<span class="item-price__old">от 1200 руб</span>
-							</div>
-						</a>
-					</div>
-					<div class="goods-catalog__item col-xs-6 col-md-4">
-						<a class="catalog__item-link cc_catalog_item_link" href="#basik_znachok" data-itemid="basik_znachok">
-							<img src="assets/img/300x375/basik_znachok.jpg" class="img-responsive img">
-							<p class='item-name'>
-								<span class="item-name__main">Басик и котова медаль</span><span class="item-name__second">(Значок)</span>
-							</p>
-							<div class="item-price">
-								<span class="item-price__new">от 990 руб</span>
-								<span class="item-price__old">от 1200 руб</span>
-							</div>
-						</a>
-					</div>
-					<div class="goods-catalog__item col-xs-6 col-md-4">
-						<a class="catalog__item-link cc_catalog_item_link" href="#basik_kilki" data-itemid="basik_kilki">
-							<img src="assets/img/300x375/basik_kilki.jpg" class="img-responsive img">
-							<p class='item-name'>
-								<span class="item-name__main">Басик и кильки</span><span class="item-name__second">(Рыбки-игрушки)</span>
-							</p>
-							<div class="item-price">
-								<span class="item-price__new">от 990 руб</span>
-								<span class="item-price__old">от 1200 руб</span>
-							</div>
-						</a>
+					<div class="goods-catalog__items">
+						
 					</div>
 				</div>
 			</section>
@@ -178,6 +106,23 @@
 	<!-- /footer -->
 
 	<!-- scripts -->
+	<script id="goods-catalog__items" type="text/x-handlebars-template">
+		<h2 class="section__header text-center">Выбери своего Басика:</h2>
+		{{#each items}}
+		<div class="goods-catalog__item col-xs-6 col-md-4">
+			<a class="catalog__item-link cc_catalog_item_link" href="#{{alias}}" data-itemid="{{alias}}">
+				<img src="assets/img/300x375/{{alias}}.jpg" class="img-responsive img">
+				<p class='item-name'>
+					<span class="item-name__main">{{name}}</span><span class="item-name__second">({{second-name}})</span>
+				</p>
+				<div class="item-price">
+					<span class="item-price__new">от {{min variations "price"}} руб</span>
+					<span class="item-price__old">от {{min variations "old-price"}} руб</span>
+				</div>
+			</a>
+		</div>
+		{{/each}}
+	</script>
 	<!--build:js assets/js/app.min.js-->
 	<script src="assets/js/dependency.min.js"></script>
 	<script src="assets/js/namespace.js"></script>
@@ -188,9 +133,11 @@
 	<script src="assets/js/controls/popup.goodsitem.js"></script>
 	<script src="assets/js/controls/popup.request-callback.js"></script>
 	<script src="assets/js/controls/button.js"></script>
+	<script src="assets/js/goods-catalog.js"></script>
 	<script src="assets/js/app.js"></script>
 	<script src="assets/js/main.js"></script>
 	<!--/build -->
+
 	<!-- /scripts -->
 </body>
 </html>

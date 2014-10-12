@@ -27,8 +27,13 @@
 		_createControls: function() {
 
 			// Controls creation here
+			this._createCatalog();
 			this._createButtons();
 			this._createPopups();			
+		},
+
+		_createCatalog: function() {
+			this._controls.catalog = ns.catalog.render(".goods-catalog__items");
 		},
 
 		_createButtons: function() {
