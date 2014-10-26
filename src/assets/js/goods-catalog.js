@@ -13,12 +13,14 @@
 			isHelperRegistered = false;
 
 		function render(selector) {
+
 			prepareHtml();
 			$catalog = $(selector);
 			return $catalog;
 		}
 
 		function prepareHtml() {
+
 			registerHelpers();
 
 			if (!goods)
@@ -30,21 +32,39 @@
 		}
 
 		function registerHelpers() {
+			
 			if (isHelperRegistered)
 				return;
-			Handlebars.registerHelper('min', function(arr, prop) {
-				if (arr == null || arr.length === 0)
-					return null;
-				var min = arr[0][prop];
-				for (var i = 1; i < arr.length; i++)
-					if (arr[i].prop < min)
-						min = arr[i][prop];
-				return min;				
-			});
+			Handlebars.registerHelper('min', minHelper);
+			Handlebars.registerHelper('list', listHelper);
 			isHelperRegistered = true;
 		}
 
+		function minHelper(arr, prop) {
+
+			if (arr == null || arr.length === 0)
+				return null;
+			var min = arr[0][prop];
+			for (var i = 1; i < arr.length; i++)
+				if (arr[i].prop < min)
+					min = arr[i][prop];
+			return min;				
+		}
+
+		function listHelper(items, options) {
+
+			var retval = "<ul>";
+			var i, length = items.length;
+
+			for (i = 0; i < length; i++) {
+				retval += "<li>" + options.fn(items[i]) + "</li>";
+			}
+
+			return retval + "</ul>";
+		}
+
 		function get(url, onLoaded, onError) {
+
 			// load json file with catalog items
 			var request = $.ajax({ 
 				type: "GET", 
@@ -60,12 +80,14 @@
 		}
 
 		function retryRequest (requestHandler, url, onLoaded, onError) {
+
 			setTimeout(function() {
 				requestHandler(url, onLoaded, onError);
 			}, retryDelay);
 		}
 
 		function onDataLoaded(data, textStatus, jqXHR) {
+
 			goods = data; 											// cached products
 			var html = fillTemplate('#goods-catalog__items', data); // fill template
 			$catalog.html(html);									// insert html into DOM
@@ -74,20 +96,24 @@
 		}
 
 		function onError(jqXHR, textStatus, errorThrown) {
+
 			$catalog.html(textStatus);								// show error
 		}
 
 		function fillTemplate(sourceId, data) {
+
 			var source = $(sourceId).html(),
 				template = Handlebars.compile(source);
 			return (template(data));
 		}
 		// plugins initialization
 		function plugins() {
+
 			//spinners = $(".spinners").spinner({max: 10, min: 0 }); // connect jquery ui
 		}
 
 		function attachEvents() {
+
 			links = $('.catalog__item-link');
 			links.on('click', function() { 
 

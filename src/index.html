@@ -111,6 +111,24 @@
 		{{#each items}}
 		<div class="goods-catalog__item col-xs-6 col-md-4">
 			<a class="catalog__item-link cc_catalog_item_link" href="#{{alias}}" data-itemid="{{alias}}">
+				<div class="catalog__item-overlay"></div>
+				<div class="catalog__item-details">
+					<ul class="details__list">
+						{{#each variations}}
+							<li class="details__list_item">
+								<div class="details__item_property details__item_property-size">
+									{{size}} см.:
+								</div>
+								<div class="details__item_property details__item_property-price">
+									<span>{{price}} руб.</span>
+								</div>
+								<div class="details__item_property details__item_property-oldprice">
+									<span>({{old-price}} руб.)</span>
+								</div>
+							</li>
+						{{/each}}
+					</ul>
+				</div>
 				<img src="assets/img/300x375/{{alias}}.jpg" class="img-responsive img">
 				<p class='item-name'>
 					<span class="item-name__main">{{name}}</span><span class="item-name__second">({{second-name}})</span>
