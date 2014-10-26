@@ -43,7 +43,8 @@
 					<!--navbar-header -->
 					<div class="navbar__header">
 						<button type="button" class="navbar__header-button">
-							<span class="button-icon icon-cart3"></span>
+							<span class="button-icon button-icon-cart icon-cart3"></span>
+							<span class="button-cart-count hidden"></span>
 							<span class="button-text hidden-xs">Корзина</span>
 						</button>
 						<a class="navbar-brand" href="#"><span class="navbar-brand__first">Твой кот</span><span class="navbar-brand__second"> - </span><span class="navbar-brand__last">Басик</span></a>
@@ -109,7 +110,7 @@
 	<script id="goods-catalog__items" type="text/x-handlebars-template">
 		<h2 class="section__header text-center">Выбери своего Басика:</h2>
 		{{#each items}}
-		<div class="goods-catalog__item col-xs-6 col-md-4">
+		<div class="goods-catalog__item col-xs-6 col-md-4" data-alias="{{alias}}">
 			<img src="assets/img/300x375/{{alias}}.jpg" class="img-responsive img">
 			<p class='item-name'>
 				<span class="item-name__main">{{name}}</span><span class="item-name__second">({{second-name}})</span>
@@ -145,6 +146,7 @@
 	<script src="assets/js/scroller.js"></script>
 	<script src="assets/js/eventlist.js"></script>
 	<script src="assets/js/state.js"></script>
+	<script src="assets/js/order.js"></script>
 	<script src="assets/js/controls/popup.goodsitem.js"></script>
 	<script src="assets/js/controls/popup.request-callback.js"></script>
 	<script src="assets/js/controls/button.js"></script>
