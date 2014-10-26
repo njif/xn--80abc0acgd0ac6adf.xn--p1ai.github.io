@@ -110,16 +110,31 @@
 		<h2 class="section__header text-center">Выбери своего Басика:</h2>
 		{{#each items}}
 		<div class="goods-catalog__item col-xs-6 col-md-4">
-			<a class="catalog__item-link cc_catalog_item_link" href="#{{alias}}" data-itemid="{{alias}}">
-				<img src="assets/img/300x375/{{alias}}.jpg" class="img-responsive img">
-				<p class='item-name'>
-					<span class="item-name__main">{{name}}</span><span class="item-name__second">({{second-name}})</span>
-				</p>
-				<div class="item-price">
-					<span class="item-price__new">от {{min variations "price"}} руб</span>
-					<span class="item-price__old">от {{min variations "old-price"}} руб</span>
+			<img src="assets/img/300x375/{{alias}}.jpg" class="img-responsive img">
+			<p class='item-name'>
+				<span class="item-name__main">{{name}}</span><span class="item-name__second">({{second-name}})</span>
+			</p>
+			<div class="item-price">
+				<span class="item-price__new">от {{min variations "price"}} руб</span>
+				<span class="item-price__old">от {{min variations "old-price"}} руб</span>
+			</div>
+			<div class="catalog__item_variants">
+				<div class="item__variants-dropdown cssdropdown">
+					<label class="cssdropdown__label">Выберите размер
+					<input class="cssdropdown__input" type="checkbox">
+					<div class="cssdropdown__list-wrapper">
+						<ul class="cssdropdown__list">
+						{{#each variations}}
+							<li class="cssdropdown__list-item" data-size="{{size}}"><span class="item-size">{{size}} см. -</size> <span class="item-price__old">{{old-price}} руб.</span> <span class="item-price__new">{{price}} руб.</span></li>
+						{{/each}}
+						</ul>				
+					</div>
+					</label>
+
 				</div>
-			</a>
+			</div>
+
+			<div class="goods-catalog__item_buy">В корзину</div>
 		</div>
 		{{/each}}
 	</script>
