@@ -263,6 +263,7 @@ li {
   cursor: pointer;
   display: block;
   text-decoration: none;
+  white-space: nowrap;
 }
 .cssdropdown__input {
   position: absolute;
@@ -574,6 +575,10 @@ section.goods-catalog {
   color: #333333;
   font-weight: bold;
   font-size: 15px;
+}
+.item-price__new,
+.item-price__old {
+  white-space: nowrap;
 }
 .goods-catalog__item .item-price__old {
   color: gray;
