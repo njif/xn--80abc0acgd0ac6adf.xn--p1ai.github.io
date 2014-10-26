@@ -60,6 +60,7 @@ var config = {
 				// config.js.bundles.dependency.files
 				files: {
 					jquery: 		'bower_components/jquery/dist/jquery.js',
+					underscore: 	'bower_components/underscore/underscore.js',
 					handlebars: 	'bower_components/handlebars/handlebars.js',
 					slimscroll: 	'bower_components/fullpage.js/vendors/jquery.slimscroll.min.js',
 					easings: 		'bower_components/fullpage.js/vendors/jquery.easings.min.js',
@@ -79,7 +80,8 @@ var config = {
 					'src/assets/js/jstools.js',
 					'src/assets/js/scroller.js',
 					'src/assets/js/eventlist.js',
-					'src/assets/js/state.js',					
+					'src/assets/js/state.js',
+					'src/assets/js/order.js',
 					'src/assets/js/controls/popup.goodsitem.js',
 					'src/assets/js/controls/popup.request-callback.js',
 					'src/assets/js/controls/button.js',
@@ -274,6 +276,7 @@ function copyJsDependency() {
 
 	gulp.src([
 				dependency.files.jquery,
+				dependency.files.underscore,
 				dependency.files.handlebars/*,
 				dependency.files.mousewheel,
 				dependency.files.easings,
@@ -344,6 +347,7 @@ function watchJsDependency() {
 	var dependency = config.js.bundles.dependency;
 	gulp.watch([
 				dependency.files.jquery,
+				dependency.files.underscore,
 				dependency.files.handlebars/*,
 				dependency.files.easings,
 				dependency.files.slimscroll,
