@@ -1,12 +1,20 @@
 ;(function(ns, $){
 
-	var catalog = (function() {
+	// TODO: refactoring!
+
+	var defaults = {
+		itemSelector: '.catalog__item-link'
+	}
+
+	var catalog = (function(options) {
 
 		var publicApi = {
 			render: render
 		}
 
-		var goods = null,
+		var config = $.extend({}, defaults, options);
+
+		var goodsData = null,
 			template = null,
 			retryDelay = 200,
 			$catalog = null
@@ -14,18 +22,22 @@
 
 		function render(selector) {
 
+			if ($catalog)
+				return this;
+
 			prepareHtml();
 			$catalog = $(selector);
-			return $catalog;
+			return this;
 		}
 
 		function prepareHtml() {
 
 			registerHelpers();
 
-			if (!goods)
+			if (!goodsData)
 				get('data/catalog.json', onDataLoaded, onError);
-/*
+
+/*			TODO: test catalog template loading
 			if (!template)
 				get('templates/catalog.html', onDataLoaded, onError);
 */			
@@ -88,7 +100,7 @@
 
 		function onDataLoaded(data, textStatus, jqXHR) {
 
-			goods = data; 											// cached products
+			goodsData = data; 											// cached products
 			var html = fillTemplate('#goods-catalog__items', data); // fill template
 			$catalog.html(html);									// insert html into DOM
 			plugins();
@@ -114,10 +126,68 @@
 
 		function attachEvents() {
 
-			links = $('.catalog__item-link');
-			links.on('click', function() { 
+			// hide all opened dropdown on document click
+
+			$(document).on('click', ':not(.cssdropdown__label)', function(event) { 
+
+				hidePopups();
+			});
+
+
+			// hide all opened dropdown on other dropdown click
+
+			$catalog.on('click', '.cssdropdown__label', function(event) { 
+				
+				stopPropagation(event);
+				var $el = getTargetByEvent(event);
+				hidePopups($el);
+			});
+
+			$catalog.on('click', '.cssdropdown__list-item', function(event) {
+
+				stopPropagation(event);
+				var $el = getTargetByEvent(event);
+				changeItemVariant($el);
+
+				closeCurentPopup($el);
 
 			});
+		}
+
+		function changeItemVariant($element) {
+
+			var html = $element.closest('.cssdropdown__list-item').html();
+			var $html = $(html);
+			$html.find('.item-price__old').remove();
+			$element.closest('.cssdropdown__label').find('.cssdropdown__label_text').html($html.html());
+		}
+
+		function closeCurentPopup($element) {
+
+			$element.closest('.cssdropdown__input').prop('checked', false);
+		}
+
+		function hidePopups(excludeElement) {
+
+			var allDropdownPopups = $catalog.find('.cssdropdown__input');
+
+			if (excludeElement)
+				allDropdownPopups = allDropdownPopups.not(excludeElement);
+
+			allDropdownPopups.prop('checked', false); 	// hide popup
+														// look at cssdropdown.less:
+														// .cssdropdown__input:checked ~ .cssdropdown__list-wrapper { ... }
+		}
+
+		function getTargetByEvent(ev) {
+
+			return $(ev.target || ev.srcElement);
+		}
+
+		function stopPropagation(event) {
+
+			event.stopPropagation();
+			event.stopImmediatePropagation();
 		}
 
 		return publicApi;

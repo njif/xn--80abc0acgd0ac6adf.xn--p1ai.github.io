@@ -8952,6 +8952,9 @@ li {
 
 .cssdropdown {
   display: inline-block;
+  vertical-align: top;
+  zoom: 1 !ie;
+  display: inline !ie;
   margin: 0;
   border: 1px solid #cbbeb9;
   box-shadow: 0 1px 1px #f1efee;
@@ -8976,6 +8979,9 @@ li {
 
 .cssdropdown__input:checked ~ .cssdropdown__list-wrapper {
   display: inline-block;
+  vertical-align: top;
+  zoom: 1 !ie;
+  display: inline !ie;
 }
 
 /* Droddown list */
