@@ -1,39 +1,73 @@
 ;(function (ns, Handlebars) {
 
-	var templater = (function() {
+	// PUBLIC API:
 
-		var publicApi = {
-			init: init,
-			fillCatalog: fillCatalog
+	var templaterApi = {
+		instance: getInstance,
+		init: init,
+		fillCatalog: fillCatalog
+	};
+
+	function getInstance(options) {
+
+		if (!templaterInstance)		
+			templaterInstance = new Templater(options || {});
+			
+		getInstance = function() { return templaterInstance; };
+		return templaterInstance;
+	}
+
+	function init() {
+
+		var instance = getInstance();
+		instance.init(); 
+		return instance;
+	}
+
+	function fillCatalog(data) {
+
+		var instance = getInstance();
+		instance.fillCatalog(data); 
+		return instance;
+	}
+
+	// =============================
+	// PRIVATE:
+
+	var templaterInstance = null;
+
+	var defaults = {
+
+		templateIds: {
+			catalog: '#goods-catalog__items'
 		}
+	}
 
-		// Private vars and methods
+	var Templater = function(options) {
 
-		var defaults = {
+		this._config = $.extend({}, defaults, options);
 
-			templateIds: {
-				catalog: '#goods-catalog__items'
-			}
-		}
+		this._compiled = {};
+		this._isHelperRegistered = false;
+	}
 
-		var compiled = {};
-		var isHelperRegistered = false;
+	Templater.prototype = {
 
-		function fillCatalog(data) {
+		fillCatalog: function(data) {
 
-			var templateIds = defaults.templateIds.catalog;
-			return fillTemplate(templateIds, data);
-		}
+			var templateIds = this._config.templateIds.catalog;
+			return this._fillTemplate(templateIds, data);
+		},
 
-		function init(){
+		init: function(){
 
-			registerHelpers();
+			this._registerHelpers();
 			return this;
-		}
+		},
 
-		function fillTemplate(sourceId, data) {
+		_fillTemplate: function(sourceId, data) {
 
-			var template = compiled[sourceId];
+			var template = this._compiled[sourceId];
 
 			if (template)
 				return (template(data));
@@ -41,20 +75,22 @@
 			var source = $(sourceId).html();
 			var template = Handlebars.compile(source);
 
-			compiled[sourceId] = template;
+			this._compiled[sourceId] = template;
 			return template(data);
-		}
+		},
 
-		function registerHelpers() {
-			
-			if (isHelperRegistered)
+		_registerHelpers: function() {
+				
+			if (this._isHelperRegistered)
 				return;
-			Handlebars.registerHelper('min', minHelper);
-			Handlebars.registerHelper('list', listHelper);
-			isHelperRegistered = true;
-		}
 
-		function minHelper(arr, prop) {
+			Handlebars.registerHelper('min', $.proxy(this._minHelper, this));
+			Handlebars.registerHelper('list', $.proxy(this._listHelper, this));
+
+			this._isHelperRegistered = true;
+		},
+
+		_minHelper: function(arr, prop) {
 
 			if (arr == null || arr.length === 0)
 				return null;
@@ -63,9 +99,9 @@
 				if (arr[i].prop < min)
 					min = arr[i][prop];
 			return min;				
-		}
+		},
 
-		function listHelper(items, options) {
+		_listHelper: function(items, options) {
 
 			var retval = "<ul>";
 			var i, length = items.length;
@@ -76,11 +112,8 @@
 
 			return retval + "</ul>";
 		}
+	}
 
-		return publicApi;
-
-	}());
-
-	ns.templater = templater;
+	ns.templater = templaterApi;
 
 }(window.basik || window, Handlebars));
