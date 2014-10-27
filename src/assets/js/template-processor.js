@@ -3,10 +3,34 @@
 	// PUBLIC API:
 
 	var templaterApi = {
-		instance: getInstance,
 		init: init,
-		fillCatalog: fillCatalog
+		fillCatalog: fillCatalog,
+		fillModalCart: fillModalCart
 	};
+
+	function init(instanceOptions) {
+
+		var instance = getInstance(instanceOptions);
+		instance.init(); 
+		return templaterApi;
+	}
+
+	function fillCatalog(data) {
+
+		var instance = getInstance();
+		var html = instance.fillCatalog(data); 
+		return html;
+	}
+
+	function fillModalCart(data) {
+
+		var instance = getInstance();
+		var html = instance.fillModalCart(data); 
+		return html;
+	}
+
+	// =============================
+	// PRIVATE:
 
 	function getInstance(options) {
 
@@ -17,29 +41,13 @@
 		return templaterInstance;
 	}
 
-	function init() {
-
-		var instance = getInstance();
-		instance.init(); 
-		return instance;
-	}
-
-	function fillCatalog(data) {
-
-		var instance = getInstance();
-		instance.fillCatalog(data); 
-		return instance;
-	}
-
-	// =============================
-	// PRIVATE:
-
 	var templaterInstance = null;
 
 	var defaults = {
 
 		templateIds: {
-			catalog: '#goods-catalog__items'
+			catalog: '#goods-catalog__items',
+			modalCart: '#modal__cart'
 		}
 	}
 
@@ -56,6 +64,12 @@
 		fillCatalog: function(data) {
 
 			var templateIds = this._config.templateIds.catalog;
+			return this._fillTemplate(templateIds, data);
+		},
+
+		fillModalCart: function(data) {
+
+			var templateIds = this._config.templateIds.modalCart;
 			return this._fillTemplate(templateIds, data);
 		},
 

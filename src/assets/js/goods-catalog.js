@@ -13,14 +13,14 @@
 
 		var instance = getInstance(options);
 		instance.init(state, templater, selector); 
-		return instance;
+		return catalogApi;
 	}
 
 	function render() {
 
 		var instance = getInstance(options);
 		instance.render(); 
-		return instance;
+		return catalogApi;
 	}
 
 	// =============================

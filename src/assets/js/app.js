@@ -27,6 +27,7 @@
 			this._order = new ns.Order(this._state, { added: 'order.item.added', removed: 'order.item.removed' });
 
 			this._controls.catalog = ns.catalog.init(this._state, templater, ".goods-catalog__items").render();
+			//this._controls.modalCart = ns.modalCart.init(this._state, templater, "#modal__cart .modal-content");
 
 			this._createButtons();
 			this._createPopups();
@@ -37,9 +38,8 @@
 		_createButtons: function() {
 
 			var buttons = this._controls.buttons;
-			buttons.goods = new ns.PageButton($('.cc_button_goods_catalog'), this._state, { click: 'buttons.goods_catalog.clicked' });
-			buttons.item = new ns.PageButton($('.cc_catalog_item_link'), this._state, { click: 'buttons.goods_item.clicked' });
-
+			buttons.goToCart = new ns.PageButton($('.navbar__header-button'), this._state, { click: 'buttons.header_cart.clicked' });
+			buttons.goToCatalog = new ns.PageButton($('.cc_button_goods_catalog'), this._state, { click: 'buttons.goods_catalog.clicked' });
 		},
 
 		_createPopups: function() {
@@ -65,17 +65,20 @@
 			state // subscribe to
 
 			// BUTTONS CLICK EVENTS
-			
-				.on('clicked:goods-item', function(clickEvent) {
-
-					popups.goodsitem.show(clickEvent);
-				})
 				.on('clicked:goods-catalog', function(clickEvent) {
 
 					var scrollTop = $('.goods-catalog').offset().top - $('.navbar-fixed-top').height();
 					$("body").animate({ scrollTop: scrollTop }, 400, 'swing');
 					return false;
 				})
+				.on('clicked:header_cart', function(clickEvent) {
+
+					var html = ns.templater.fillModalCart({});
+					var holder = $('.modal__cart').html(html);
+					holder.find('.modal-body').html('В вашей корзине ещё нет товаров.');
+					holder.find('.modal').modal('show');
+					return false;
+				})				
 				.on('clicked:catalog_cart', function(orderItem) {
 
 					owner._order.add(orderItem);
@@ -89,6 +92,11 @@
 					else
 						$icon.removeClass('hidden').text(count);
 				});
+/*				// Old code!
+				.on('clicked:goods-item', function(clickEvent) {
+					popups.goodsitem.show(clickEvent);
+				})
+*/
 		}
 	};
 

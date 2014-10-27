@@ -9109,6 +9109,15 @@ li {
   outline: 0;
 }
 
+.modal__cart_body {
+  text-align: center;
+  color: #5f6a71 !important;
+  font-size: 16px;
+  display: block;
+  min-height: 200px;
+  background: url("../img/cart/cart-bg.png") no-repeat center;
+}
+
 .jumbotron {
   border: none;
   margin-bottom: 0;
