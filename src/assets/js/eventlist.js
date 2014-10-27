@@ -9,6 +9,8 @@
 
 		'buttons.catalog_cart.clicked': 				'clicked:catalog_cart',
 
+		'buttons.header_cart.clicked': 					'clicked:header_cart',
+
 		'order.item.added': 							'added:order-item',
 		'order.item.removed': 							'removed:order-item',
 	};

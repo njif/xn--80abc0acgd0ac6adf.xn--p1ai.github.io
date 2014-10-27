@@ -34,8 +34,8 @@
 	<link rel="stylesheet" type="text/css" href="assets/css/style-ie7.css" />
 	<![endif]-->
 
-    <div class="wrapper">
-        <div class="maincontent">
+	<div class="wrapper">
+		<div class="maincontent">
 
 			<!-- navbar -->
 			<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -106,25 +106,31 @@
 	</footer>
 	<!-- /footer -->
 
-<div class="my_modal modal fade">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-        <h4 class="modal-title">Modal title</h4>
-      </div>
-      <div class="modal-body">
-        <p>One fine body&hellip;</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
+	<div class="modal__cart">
+
+	</div>
 
 	<!-- scripts -->
+
+	<script id="modal__cart" type="text/x-handlebars-template">
+		<div class="modal fade">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Закрыть</span></button>
+						<h4 class="modal-title">Корзина</h4>
+					</div>
+					<div class="modal-body modal__cart_body">
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Продолжить покупки</button>
+						<button type="button" class="btn btn-primary">Оформить заказ</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</script>
+
 	<script id="goods-catalog__items" type="text/x-handlebars-template">
 		<h2 class="section__header text-center">Выбери своего Басика:</h2>
 		{{#each items}}
