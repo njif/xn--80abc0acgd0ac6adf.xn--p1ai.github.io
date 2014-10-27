@@ -9,10 +9,10 @@
 		
 	var options = {};
 
-	function init(state, templater, selector) {
+	function init(state, templater) {
 
 		var instance = getInstance(options);
-		instance.init(state, templater, selector); 
+		instance.init(state, templater); 
 		return catalogApi;
 	}
 
@@ -38,7 +38,7 @@
 	};
 
 	var defaults = {
-		itemSelector: '.catalog__item-link',
+		itemSelector: '.goods-catalog__items', //'.catalog__item-link',
 		dataUrl: 'data/catalog.json'
 	}
 
@@ -56,12 +56,12 @@
 
 	Catalog.prototype = {
 		
-		init: function(state, templater, selector) {
+		init: function(state, templater) {
 
 			if (this._holder)
 				return this;
 
-			this._holder = $(selector);
+			this._holder = $(this._config.itemSelector);
 			this._templater = templater;
 			this._appState = state;
 
@@ -181,7 +181,7 @@
 				return;
 			}
 
-			var orderItem = $.extend({}, goodsItem, { size: itemSize });
+			var orderItem = $.extend({}, goodsItem, { size: itemSize }); // created copy!
 
 			this._appState.raise('buttons.catalog_cart.clicked', orderItem);
 		},

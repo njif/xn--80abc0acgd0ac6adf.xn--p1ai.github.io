@@ -1,11 +1,12 @@
-;(function (ns, Handlebars) {
+;(function (ns, Handlebars, _) {
 
 	// PUBLIC API:
 
 	var templaterApi = {
 		init: init,
 		fillCatalog: fillCatalog,
-		fillModalCart: fillModalCart
+		fillModalCart: fillModalCart,
+		fillModalTable: fillModalTable
 	};
 
 	function init(instanceOptions) {
@@ -29,6 +30,13 @@
 		return html;
 	}
 
+	function fillModalTable(data) {
+
+		var instance = getInstance();
+		var html = instance.fillModalTable(data); 
+		return html;
+	}
+
 	// =============================
 	// PRIVATE:
 
@@ -47,7 +55,8 @@
 
 		templateIds: {
 			catalog: '#goods-catalog__items',
-			modalCart: '#modal__cart'
+			modalCart: '#modal__cart',
+			modalCartTable: '#modal__cart_table'
 		}
 	}
 
@@ -71,6 +80,12 @@
 
 			var templateIds = this._config.templateIds.modalCart;
 			return this._fillTemplate(templateIds, data);
+		},
+
+		fillModalTable: function(data) {
+
+			var templateIds = this._config.templateIds.modalCartTable;
+			return this._fillTemplate(templateIds, { items: data });
 		},
 
 		init: function(){
@@ -100,8 +115,47 @@
 
 			Handlebars.registerHelper('min', $.proxy(this._minHelper, this));
 			Handlebars.registerHelper('list', $.proxy(this._listHelper, this));
+			Handlebars.registerHelper('displayIfLess', this._displayIfLessHelper); // $.proxy(this._displayIfLessHelper, this));
+			Handlebars.registerHelper('group_discount', $.proxy(this._groupDiscountHelper, this));
+			Handlebars.registerHelper('price_after_discount', $.proxy(this._priceAfterDiscountHelper, this));
+			Handlebars.registerHelper('total_after_discount', $.proxy(this._totalAfterDiscountHelper, this));
 
 			this._isHelperRegistered = true;
+		},
+
+		_totalAfterDiscountHelper: function(items) {
+
+			var afterDiscountForItem = $.proxy(this._priceAfterDiscountHelper, this);
+			var total = 0;
+
+			_.each(items, function(item) {
+
+				total += afterDiscountForItem(item.count, item['old-price'], item.price);
+			});
+
+			return total;
+		},
+
+		_displayIfLessHelper: function(count, options) {
+
+			var items = options.data.root.items;			
+			return items.length < count ? options.fn(this) : null;
+		},
+
+		_priceAfterDiscountHelper: function(count, oldPrice, price) {
+
+			var sumBeforeDiscount = price * count;
+
+			var discont = this._groupDiscountHelper(count, oldPrice, price);
+
+			var result = sumBeforeDiscount - discont;
+			return result < 0 ? - result : result;				
+		},
+
+		_groupDiscountHelper: function(count, oldPrice, price) {
+
+			var result = count * (oldPrice - price);
+			return result < 0 ? - result : result;				
 		},
 
 		_minHelper: function(arr, prop) {
@@ -130,4 +184,4 @@
 
 	ns.templater = templaterApi;
 
-}(window.basik || window, Handlebars));
+}(window.basik || window, Handlebars, _));

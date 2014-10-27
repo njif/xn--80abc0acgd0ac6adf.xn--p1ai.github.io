@@ -104,7 +104,7 @@
 
 	</div>
 
-	<!-- scripts -->
+	<!-- html templates -->
 
 	<script id="modal__cart" type="text/x-handlebars-template">
 		<div class="modal fade">
@@ -118,11 +118,84 @@
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal">Продолжить покупки</button>
-						<button type="button" class="btn btn-primary">Оформить заказ</button>
+						<button type="submit" class="btn btn-warning" form="order-form">Заказать</button>
 					</div>
 				</div>
 			</div>
 		</div>
+	</script>
+
+	<script id="modal__cart_table" type="text/x-handlebars-template">
+		<form id="order-form" class="form-horizontal" role="form">
+			<div class="modalcart__header">Ваш заказ</div>
+			<table class="modalcart__table table table-hover">
+				<thead>
+					<tr>
+						<td class="modalcart__table_header-name" {{#displayIfLess 2 }}colspan="2"{{/displayIfLess}}>Название</td>
+						<td class="modalcart__table_header-count">Количество</td>
+						<td class="modalcart__table_header-price">Цена</td>
+						<td class="modalcart__table_header-discount">Скидка</td>
+						<td class="modalcart__table_header-sum">Сумма</td>
+					</tr>
+				</thead>
+				<tbody>
+				{{#each items}}
+					<tr>
+						{{#displayIfLess 2 }}
+						<td class="modalcart__item-pic">
+							<img src="assets/img/300x375/{{alias}}.jpg" class="img-responsive img">
+						</td>
+						{{/displayIfLess}}
+						<td class="modalcart__item_name">
+							<span class="modalcart__item_name-main">{{name}}</span> <span class="modalcart__item_name-second">({{second-name}})</span> <span class="modalcart__item-size">- {{size}} см</span>
+						</td>
+						<td class="modalcart__item-count">
+							<div class="modalcart__item_spiner modalcart__item_spiner-minus">						
+							</div>
+							<input maxlength="2" type="text" class="modalcart__item_spiner-input" value="{{count}}" size="1">
+							<div class="modalcart__item_spiner modalcart__item_spiner-plus">
+							</div>
+						</td>
+						<td class="modalcart__item-price">
+							{{price}}
+						</td>
+						<td class="modalcart__item-discount">{{ group_discount [count] [old-price] [price] }}</td>
+						<td class="modalcart__item-sum">{{ price_after_discount [count] [old-price] [price] }}</td>
+					</tr>
+				{{/each}}
+				<tfoot>
+					<tr>
+						<td {{#displayIfLess 2 }}colspan="2"{{/displayIfLess}}></td>
+						<td class="modalcart__item-totalsum" colspan="4">Итого: {{ total_after_discount items }} руб</td>
+
+				</tfoot>
+				</tbody>
+			</table>
+
+			<div class="modalcart__header">Ваши данные</div>
+
+			<div class="modal__cart_contacts-wrapper">
+				<div class="form-group form-group-sm">
+					<label for="name" class="col-xs-3 control-label">Ваше имя</label>
+					<div class="col-xs-9">
+						<input type="name" required class="form-control" id="name" placeholder="Имя" name="name">
+					</div>
+				</div>
+				<div class="form-group form-group-sm">
+					<label for="phone" class="col-xs-3 control-label">Телефон</label>
+					<div class="col-xs-9">
+						<input type="phone" required class="form-control" id="phone" placeholder="Телефон" name="phone">
+					</div>
+				</div>
+				<div class="form-group form-group-sm">
+					<label for="email" class="col-xs-3 control-label">Ваш email</label>
+					<div class="col-xs-9">
+						<input type="email" required class="form-control" id="email" placeholder="Почта" name="email">
+					</div>
+				</div>
+			</div>
+				&nbsp;
+		</form>
 	</script>
 
 	<script id="goods-catalog__items" type="text/x-handlebars-template">
@@ -157,6 +230,8 @@
 		</div>
 		{{/each}}
 	</script>
+
+	<!-- scripts -->
 	<script src="assets/js/app.min.js"></script>
 
 	<!-- /scripts -->
