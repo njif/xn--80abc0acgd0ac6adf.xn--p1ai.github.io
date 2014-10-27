@@ -26,8 +26,8 @@
 
 			this._order = new ns.Order(this._state, { added: 'order.item.added', removed: 'order.item.removed' });
 
-			this._controls.catalog = ns.catalog.init(this._state, templater, ".goods-catalog__items").render();
-			//this._controls.modalCart = ns.modalCart.init(this._state, templater, "#modal__cart .modal-content");
+			this._controls.catalog = ns.catalog.init(this._state, templater).render();
+			this._controls.modalCart = ns.modalCart.init(this._state, templater);
 
 			this._createButtons();
 			this._createPopups();
@@ -75,7 +75,8 @@
 
 					var html = ns.templater.fillModalCart({});
 					var holder = $('.modal__cart').html(html);
-					holder.find('.modal-body').html('В вашей корзине ещё нет товаров.');
+					var tableHtml = owner._controls.modalCart.getHtml(owner._order.items());
+					holder.find('.modal__cart_body').html(tableHtml);
 					holder.find('.modal').modal('show');
 					return false;
 				})				
@@ -92,11 +93,6 @@
 					else
 						$icon.removeClass('hidden').text(count);
 				});
-/*				// Old code!
-				.on('clicked:goods-item', function(clickEvent) {
-					popups.goodsitem.show(clickEvent);
-				})
-*/
 		}
 	};
 
