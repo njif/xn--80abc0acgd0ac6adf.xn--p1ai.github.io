@@ -62,6 +62,7 @@ var config = {
 					jquery: 		'bower_components/jquery/dist/jquery.js',
 					underscore: 	'bower_components/underscore/underscore.js',
 					handlebars: 	'bower_components/handlebars/handlebars.js',
+					bootstrapmodal: 'node_modules/bootstrap/js/modal.js',
 					slimscroll: 	'bower_components/fullpage.js/vendors/jquery.slimscroll.min.js',
 					easings: 		'bower_components/fullpage.js/vendors/jquery.easings.min.js',
 					fullPage: 		'bower_components/fullpage.js/jquery.fullPage.js',
@@ -78,6 +79,7 @@ var config = {
 				filesArr: [
 					'src/assets/js/namespace.js',
 					'src/assets/js/jstools.js',
+					'src/assets/js/template-processor.js',
 					'src/assets/js/scroller.js',
 					'src/assets/js/eventlist.js',
 					'src/assets/js/state.js',
@@ -277,7 +279,8 @@ function copyJsDependency() {
 	gulp.src([
 				dependency.files.jquery,
 				dependency.files.underscore,
-				dependency.files.handlebars/*,
+				dependency.files.handlebars,
+				dependency.files.bootstrapmodal/*,
 				dependency.files.mousewheel,
 				dependency.files.easings,
 				dependency.files.slimscroll,
@@ -348,7 +351,8 @@ function watchJsDependency() {
 	gulp.watch([
 				dependency.files.jquery,
 				dependency.files.underscore,
-				dependency.files.handlebars/*,
+				dependency.files.handlebars,
+				dependency.files.bootstrapmodal/*,
 				dependency.files.easings,
 				dependency.files.slimscroll,
 				dependency.files.fullPage,
