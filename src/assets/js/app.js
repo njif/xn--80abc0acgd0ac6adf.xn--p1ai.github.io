@@ -7,7 +7,6 @@
 	var BasikApp = function() {
 
 		this._state = null;
-
 		this._order = null;
 
 		this._controls = { buttons: { goods: null, item: null }, popups: { goodsitem: null } };
@@ -21,10 +20,13 @@
 
 			// Initialization here
 
-			this._state = new ns.AppState(ns.eventList || {});
+			this._state = new ns.AppState(ns.eventList || {});			
+
+			var templater = ns.templater.init();
+
 			this._order = new ns.Order(this._state, { added: 'order.item.added', removed: 'order.item.removed' });
 
-			this._controls.catalog = ns.catalog.state(this._state).render(".goods-catalog__items");
+			this._controls.catalog = ns.catalog.init(this._state, templater, ".goods-catalog__items").render();
 
 			this._createButtons();
 			this._createPopups();
