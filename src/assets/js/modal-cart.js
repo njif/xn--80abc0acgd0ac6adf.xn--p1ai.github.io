@@ -91,6 +91,7 @@
 				.on('click', '[type=submit]', $.proxy(this._cartFormSubmitClick, this))
 
 				.on('change', '.modalcart__item_spiner-input', $.proxy(this._cartItemCountChange, this))
+				.on('click', '.modalcart__item_spiner', $.proxy(this._cartItemSpinnerClick, this))
 				.on('change', '.modal__cart_contacts-wrapper input', _.debounce($.proxy(this._cartContactsChange, this), 300));
 		},
 
@@ -109,6 +110,27 @@
 			contacts[contactFieldName] = $el.val();
 
 			this._appState.raise(this._config.events.contactchanged, contacts);
+		},
+
+		_cartItemSpinnerClick: function(event) {
+
+			var $el = this._getTargetByEvent(event);
+			var $input = $el.siblings('.modalcart__item_spiner-input');
+			var val = $input.val() * 1;
+			if ($el.hasClass('modalcart__item_spiner-minus'))
+			{				
+				if (val > 0) {
+					$input.val(val - 1);
+					$input.trigger('change');
+				}
+
+			} else {
+				if (val < 99)
+				{
+					$input.val(val + 1);
+					$input.trigger('change');
+				}
+			}
 		},
 
 		_cartItemCountChange: function(event) {
