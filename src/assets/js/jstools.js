@@ -62,7 +62,7 @@
 				return params.done({ error: true, message: 'Неверный email' });
 
 			$.ajax({
-				url: '//basik.besaba.com/email/send.php',
+				url:  'http://cssbutton.e3w.ru/email/send.php', //'//basik.besaba.com/email/send.php',
 				type: 'POST',
 				data: { name: contacts.name, phone: contacts.phone, email: contacts.email, items: params.items },
 				crossDomain: true,
