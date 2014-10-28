@@ -90,6 +90,11 @@
 				.on('changed:cart-item-count', function(params) {
 
 					owner._order.setItemCount(params.alias, params.size, params.count);
+
+					// Yeah... I know... this is very bad solution. But I have no time for good solution now
+					var holder = $('.modal__cart')
+					var tableHtml = owner._controls.modalCart.getHtml({ items: owner._order.items(), contacts: owner._order.contacts() } );
+					holder.find('.modal__cart_body').html(tableHtml);
 				})
 				.on('changed:cart-contact', function(contacts) {
 
