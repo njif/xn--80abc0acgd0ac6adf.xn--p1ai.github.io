@@ -666,8 +666,9 @@ section.goods-catalog {
 footer {
   padding-top: 10px;
   width: 100%;
-  color: #3a2315;
+  color: #fff;
   position: relative;
+  text-shadow: 1px 1px 2px #333;
 }
 .phone-link {
   color: inherit;

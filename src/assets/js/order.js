@@ -13,7 +13,7 @@
 
 		toJson: function() {
 
-			return $.extend({}, { items: this._hash }, { contacts: this._contacts });
+			return $.extend({}, { items: this._items }, { contacts: this._contacts });
 		},
 
 		clear: function() {
