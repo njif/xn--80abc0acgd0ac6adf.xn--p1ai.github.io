@@ -88,11 +88,13 @@
 				.on('click', '.modalcart__item_spiner-minus', $.proxy(this._countMinusClick, this))
 				.on('click', '.modalcart__item_spiner-plus', $.proxy(this._countPlusClick, this))
 				.on('click', '.modalcart__removepic', $.proxy(this._itemRemoveClick, this))
-				.on('click', '[type=submit]', $.proxy(this._cartFormSubmitClick, this))
-
 				.on('change', '.modalcart__item_spiner-input', $.proxy(this._cartItemCountChange, this))
 				.on('click', '.modalcart__item_spiner', $.proxy(this._cartItemSpinnerClick, this))
 				.on('change', '.modal__cart_contacts-wrapper input', _.debounce($.proxy(this._cartContactsChange, this), 300));
+
+			var handleSubmitClick = $.proxy(this._cartHandleSubmitClick, this);
+			var debounceSubmitClick = _.debounce(handleSubmitClick, 3000, true);
+			this._holder.on('click', '[type=submit]', $.proxy(this._cartFormSubmitClick, this, debounceSubmitClick));
 		},
 
 		// ============================
@@ -143,10 +145,13 @@
 			this._appState.raise(this._config.events.itemchanged, { alias: $el.data('alias'), size: $el.data('size'), count: $el.val() });
 		},
 
-		_cartFormSubmitClick: function(event) {
+		_cartFormSubmitClick: function(handleSubmitClick, event) {
 
 			event.preventDefault();
+			handleSubmitClick(event);
+		},
 
+		_cartHandleSubmitClick: function(event) {
 			$('.modal__cart_error').text('').addClass('hidden');
 
 			var $el = this._getTargetByEvent(event);
@@ -155,7 +160,6 @@
 				return;
 
 			this._appState.raise(this._config.events.submited, { done: $.proxy(this._onFormSended, this) });
-
 		},
 
 		_onFormSended: function(response) {
@@ -163,7 +167,7 @@
 			if (response.error)
 				return $('.modal__cart_error').text(response.message).removeClass('hidden');
 
-			this._holder.find('.modal').modal('hide');
+			this._holder.find('.modal-body').html('<div class="modal__cart_body-empty"></div>').find('.modal__cart_body-empty').text(response.message);
 		},
 
 		_countMinusClick: function(event) {

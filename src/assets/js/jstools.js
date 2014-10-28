@@ -70,7 +70,13 @@
 				success: function(data) {
 					if (!params.done)
 						return;
-					params.done({ error: false, message: data.statusText});
+					// Hoster include spam into response! We take only true data.
+					var msg = data.statusText || $('<div>' + data + '</div>');
+					var serverResponse = msg.find('.server_response');
+					var regexp = /\\r\\n/gi;
+					msg = serverResponse.length > 0 ? serverResponse.text().replace(regexp, ' ') : data.replace(regexp, ' ');
+
+					params.done({ error: false, message: msg });
 				},
 				error: function(data) {
 					if (!params.done)
