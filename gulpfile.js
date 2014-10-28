@@ -62,11 +62,7 @@ var config = {
 					jquery: 		'bower_components/jquery/dist/jquery.js',
 					underscore: 	'bower_components/underscore/underscore.js',
 					handlebars: 	'bower_components/handlebars/handlebars.js',
-					bootstrapmodal: 'node_modules/bootstrap/js/modal.js',
-					slimscroll: 	'bower_components/fullpage.js/vendors/jquery.slimscroll.min.js',
-					easings: 		'bower_components/fullpage.js/vendors/jquery.easings.min.js',
-					fullPage: 		'bower_components/fullpage.js/jquery.fullPage.js',
-					mousewheel: 	'node_modules/jquery-mousewheel/jquery.mousewheel.js'				
+					bootstrapmodal: 'node_modules/bootstrap/js/modal.js'				
 				},
 				// config.js.bundles.dependency.dest
 				dest: 'src/assets/js',
@@ -80,13 +76,10 @@ var config = {
 					'src/assets/js/namespace.js',
 					'src/assets/js/jstools.js',
 					'src/assets/js/template-processor.js',
-					'src/assets/js/scroller.js',
 					'src/assets/js/eventlist.js',
 					'src/assets/js/state.js',
 					'src/assets/js/order.js',
-					'src/assets/js/controls/popup.goodsitem.js',
-					'src/assets/js/controls/popup.request-callback.js',
-					'src/assets/js/controls/button.js',
+					'src/assets/js/button.js',
 					'src/assets/js/goods-catalog.js',
 					'src/assets/js/modal-cart.js',
 					'src/assets/js/app.js',
@@ -101,7 +94,7 @@ var config = {
 	},
 
 	server: {
-		copy: true, // Copy to local server
+		copy: false, // Copy to local server or use http-server instead this (best variant)
 		path: 'c:/WebServers/home/localhost/basik'
 	}
 };
@@ -203,7 +196,6 @@ function processCss() {
 			'src/assets/css/vendors/normalize.css',
 			'src/assets/css/vendors/bootstrap.css',
 			'src/assets/css/vendors/bootstrap-theme.css',
-			'src/assets/css/vendors/jquery.fullPage.css',
 			'src/assets/css/main.css'
 		]).pipe(plumber())
 		.pipe(autoprefixer({
@@ -281,11 +273,7 @@ function copyJsDependency() {
 				dependency.files.jquery,
 				dependency.files.underscore,
 				dependency.files.handlebars,
-				dependency.files.bootstrapmodal/*,
-				dependency.files.mousewheel,
-				dependency.files.easings,
-				dependency.files.slimscroll,
-				dependency.files.fullPage*/
+				dependency.files.bootstrapmodal
 			])
 		.pipe(uglify())
 		.pipe(concat(dependency.bundleName))
@@ -307,8 +295,7 @@ function copyCssDependency() {
 		'node_modules/bootstrap/dist/css/bootstrap.css',
 		'node_modules/bootstrap/dist/css/bootstrap-theme.css',
 		'node_modules/bootstrap/dist/css/bootstrap.css.map',
-		'node_modules/bootstrap/dist/css/bootstrap-theme.css.map'/*,
-		'bower_components/fullpage.js/jquery.fullPage.css'*/
+		'node_modules/bootstrap/dist/css/bootstrap-theme.css.map'
 		])
 		.pipe(gulp.dest('src/assets/css/vendors/'))
 		.pipe(gulpif(config.server.copy, gulp.dest(config.server.path + 'src/assets/css/vendors/')))
@@ -353,11 +340,7 @@ function watchJsDependency() {
 				dependency.files.jquery,
 				dependency.files.underscore,
 				dependency.files.handlebars,
-				dependency.files.bootstrapmodal/*,
-				dependency.files.easings,
-				dependency.files.slimscroll,
-				dependency.files.fullPage,
-				dependency.files.mousewheel*/
+				dependency.files.bootstrapmodal
 	], ['copyJsDependency']);
 }
 
