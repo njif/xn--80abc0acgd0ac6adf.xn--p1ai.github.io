@@ -5,12 +5,16 @@
 		this._events = events;
 		this._items = [];
 		this._hash = {};
+<<<<<<< HEAD
 
 		this._contacts = { name: "", phone: "", email: "" };
+=======
+>>>>>>> dcd63662b97568d80fe04f55744c5c9df43af385
 	};
 
 	Order.prototype = {
 
+<<<<<<< HEAD
 		toJson: function() {
 
 			return $.extend({}, { items: this._hash }, { contacts: this._contacts });
@@ -26,6 +30,8 @@
 				this._state.raise(this._events.changed);
 		},
 
+=======
+>>>>>>> dcd63662b97568d80fe04f55744c5c9df43af385
 		count: function() {
 
 			var count = 0;
