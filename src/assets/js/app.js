@@ -27,13 +27,9 @@
 			this._order = new ns.Order(this._state, { changed: 'order.item.changed' });
 
 			this._controls.catalog = ns.catalog.init(this._state, templater).render();
-<<<<<<< HEAD
 
 			var cartEvents = { itemchanged: 'cart.item-count.changed', submited: 'cart.form.submited', contactchanged: 'cart.contact.changed' };
 			this._controls.modalCart = ns.modalCart.init(this._state, templater, { events: cartEvents });
-=======
-			this._controls.modalCart = ns.modalCart.init(this._state, templater);
->>>>>>> dcd63662b97568d80fe04f55744c5c9df43af385
 
 			this._createButtons();
 
