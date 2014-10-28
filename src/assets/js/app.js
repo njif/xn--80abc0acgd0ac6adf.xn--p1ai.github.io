@@ -24,13 +24,14 @@
 
 			var templater = ns.templater.init();
 
-			this._order = new ns.Order(this._state, { added: 'order.item.added', removed: 'order.item.removed' });
+			this._order = new ns.Order(this._state, { changed: 'order.item.changed' });
 
 			this._controls.catalog = ns.catalog.init(this._state, templater).render();
-			this._controls.modalCart = ns.modalCart.init(this._state, templater);
+
+			var cartEvents = { itemchanged: 'cart.item-count.changed', submited: 'cart.form.submited', contactchanged: 'cart.contact.changed' };
+			this._controls.modalCart = ns.modalCart.init(this._state, templater, { events: cartEvents });
 
 			this._createButtons();
-			this._createPopups();
 
 			this._attachPubSubEvents();
 		},
@@ -40,13 +41,6 @@
 			var buttons = this._controls.buttons;
 			buttons.goToCart = new ns.PageButton($('.navbar__header-button'), this._state, { click: 'buttons.header_cart.clicked' });
 			buttons.goToCatalog = new ns.PageButton($('.cc_button_goods_catalog'), this._state, { click: 'buttons.goods_catalog.clicked' });
-		},
-
-		_createPopups: function() {
-
-			$('body').append('<div id="popups__contaier"></div>');
-			var popupsHolder = $('body').find('#popups__contaier');
-			this._controls.popups.goodsitem = new ns.PopupGoodsItem(popupsHolder, this._state);
 		},
 
 		_attachPubSubEvents: function() {
@@ -75,7 +69,7 @@
 
 					var html = ns.templater.fillModalCart({});
 					var holder = $('.modal__cart').html(html);
-					var tableHtml = owner._controls.modalCart.getHtml(owner._order.items());
+					var tableHtml = owner._controls.modalCart.getHtml({ items: owner._order.items(), contacts: owner._order.contacts() } );
 					holder.find('.modal__cart_body').html(tableHtml);
 					holder.find('.modal').modal('show');
 					return false;
@@ -84,7 +78,7 @@
 
 					owner._order.add(orderItem);
 				})
-				.on('added:order-item', function() {
+				.on('changed:order-item', function() {
 					
 					var count = owner._order.count();
 					var $icon = $('.button-cart-count');
@@ -92,6 +86,30 @@
 						$icon.addClass('hidden').text('');
 					else
 						$icon.removeClass('hidden').text(count);
+				})
+				.on('changed:cart-item-count', function(params) {
+
+					owner._order.setItemCount(params.alias, params.size, params.count);
+				})
+				.on('changed:cart-contact', function(contacts) {
+
+					owner._order.contacts(contacts);
+				})
+				.on('submited:cart-form', function(params) {
+
+					var json = owner._order.toJson();
+
+					var onDone = function(response) {
+						if (!response || response.error)							
+							return params.done(response);
+
+						owner._order.clear();
+						params.done(response);
+					};
+
+					var newParams = $.extend({}, params, json, { done: onDone });
+
+					ns.jstools.sendEmail(newParams);
 				});
 		}
 	};

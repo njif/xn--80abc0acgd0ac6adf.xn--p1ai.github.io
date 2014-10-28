@@ -2,7 +2,7 @@
 <!--[if lt IE 7]>	<html class="no-js lt-ie9 lt-ie8 lt-ie7">	<![endif]-->
 <!--[if IE 7]>		<html class="no-js lt-ie9 lt-ie8">			<![endif]-->
 <!--[if IE 8]>		<html class="no-js lt-ie9">					<![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<!--[if gt IE 8]><!--> <html lang="ru" class="no-js"> <!--<![endif]-->
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -113,7 +113,7 @@
 	<!-- html templates -->
 
 	<script id="modal__cart" type="text/x-handlebars-template">
-		<div class="modal fade">
+		<div class="modal fade modal__cart">
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header">
@@ -158,7 +158,7 @@
 						<td class="modalcart__item-count">
 							<div class="modalcart__item_spiner modalcart__item_spiner-minus">						
 							</div>
-							<input maxlength="2" type="text" class="modalcart__item_spiner-input" value="{{count}}" size="1">
+							<input maxlength="2" type="text" name="count" class="modalcart__item_spiner-input" data-alias="{{alias}}" data-size="{{size}}" value="{{count}}" size="1">
 							<div class="modalcart__item_spiner modalcart__item_spiner-plus">
 							</div>
 						</td>
@@ -184,23 +184,24 @@
 				<div class="form-group form-group-sm">
 					<label for="name" class="col-xs-3 control-label">Ваше имя</label>
 					<div class="col-xs-9">
-						<input type="name" required class="form-control" id="name" placeholder="Имя" name="name">
+						<input type="name" required class="form-control" id="name" placeholder="Имя" name="name" value="{{contacts.name}}">
 					</div>
 				</div>
 				<div class="form-group form-group-sm">
 					<label for="phone" class="col-xs-3 control-label">Телефон</label>
 					<div class="col-xs-9">
-						<input type="phone" required class="form-control" id="phone" placeholder="Телефон" name="phone">
+						<input type="phone" required class="form-control" id="phone" placeholder="Телефон" name="phone" value="{{contacts.phone}}">
 					</div>
 				</div>
 				<div class="form-group form-group-sm">
 					<label for="email" class="col-xs-3 control-label">Ваш email</label>
 					<div class="col-xs-9">
-						<input type="email" required class="form-control" id="email" placeholder="Почта" name="email">
+						<input type="email" required class="form-control" id="email" placeholder="Почта" name="email" value="{{contacts.email}}">
 					</div>
 				</div>
 			</div>
-				&nbsp;
+			<div class="modal__cart_error bg-danger hidden">
+			</div>
 		</form>
 	</script>
 

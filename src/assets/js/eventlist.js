@@ -11,8 +11,12 @@
 
 		'buttons.header_cart.clicked': 					'clicked:header_cart',
 
-		'order.item.added': 							'added:order-item',
-		'order.item.removed': 							'removed:order-item',
+		'order.item.changed': 							'changed:order-item',
+		
+		'cart.item-count.changed': 						'changed:cart-item-count',
+		'cart.contact.changed': 						'changed:cart-contact',
+
+		'cart.form.submited': 							'submited:cart-form'
 	};
 
 }(window.basik || window));

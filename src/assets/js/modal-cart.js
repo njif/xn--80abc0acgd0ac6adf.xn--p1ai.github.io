@@ -6,10 +6,8 @@
 		init: init,
 		getHtml: getHtml
 	};
-		
-	var options = {};
 
-	function init(state, templater) {
+	function init(state, templater, options) {
 
 		var instance = getInstance(options);
 		instance.init(state, templater); 
@@ -18,7 +16,7 @@
 
 	function getHtml(data) {
 
-		var instance = getInstance(options);
+		var instance = getInstance();
 		return instance.getHtml(data);
 	}
 
@@ -37,7 +35,9 @@
 	};
 
 	var defaults = {
-		itemSelector: '#modal__cart'// .modal-content'
+		modalSelector: '.modal__cart',// .modal-content'
+		formSelector: '#order-form',// .modal-content'
+		events: {}
 	}
 
 	var ModalCart = function(options) {
@@ -59,7 +59,7 @@
 			if (this._holder)
 				return this;
 
-			this._holder = $(this._config.itemSelector);
+			this._holder = $(this._config.modalSelector);
 			this._templater = templater;
 			this._appState = state;
 
@@ -68,7 +68,7 @@
 		
 		getHtml: function(data) {
 
-			if (!data || data.length === 0)
+			if (!data || !data.items || data.items.length === 0)
 				return '<div class="modal__cart_body-empty">В вашей корзине ещё нет товаров.</div>';
 
 			return this._fillTemplate(data);
@@ -87,11 +87,62 @@
 			this._holder
 				.on('click', '.modalcart__item_spiner-minus', $.proxy(this._countMinusClick, this))
 				.on('click', '.modalcart__item_spiner-plus', $.proxy(this._countPlusClick, this))
-				.on('click', '.modalcart__removepic', $.proxy(this._itemRemoveClick, this));
+				.on('click', '.modalcart__removepic', $.proxy(this._itemRemoveClick, this))
+				.on('click', '[type=submit]', $.proxy(this._cartFormSubmitClick, this))
+
+				.on('change', '.modalcart__item_spiner-input', $.proxy(this._cartItemCountChange, this))
+				.on('change', '.modal__cart_contacts-wrapper input', _.debounce($.proxy(this._cartContactsChange, this), 300));
 		},
 
 		// ============================
 		// TODO: refactor this shit later:
+
+		_cartContactsChange: function(event) {
+
+			var $el = this._getTargetByEvent(event);
+
+			if (!this._config.events.contactchanged)
+				return;
+
+			var contacts = {};
+			var contactFieldName = $el.attr('name');
+			contacts[contactFieldName] = $el.val();
+
+			this._appState.raise(this._config.events.contactchanged, contacts);
+		},
+
+		_cartItemCountChange: function(event) {
+
+			var $el = this._getTargetByEvent(event);
+
+			if (!this._config.events.itemchanged)
+				return;
+
+			this._appState.raise(this._config.events.itemchanged, { alias: $el.data('alias'), size: $el.data('size'), count: $el.val() });
+		},
+
+		_cartFormSubmitClick: function(event) {
+
+			event.preventDefault();
+
+			$('.modal__cart_error').text('').addClass('hidden');
+
+			var $el = this._getTargetByEvent(event);
+
+			if (!this._config.events.itemchanged)
+				return;
+
+			this._appState.raise(this._config.events.submited, { done: $.proxy(this._onFormSended, this) });
+
+		},
+
+		_onFormSended: function(response) {
+
+			if (response.error)
+				return $('.modal__cart_error').text(response.message).removeClass('hidden');
+
+			this._holder.find('.modal').modal('hide');
+		},
 
 		_countMinusClick: function(event) {
 
@@ -99,8 +150,8 @@
 		},
 
 		_countPlusClick: function(event) { 
-				
-			this._stopPropagation(event);
+
+			var $el = this._getTargetByEvent(event);
 		},
 
 		_itemRemoveClick: function(event) {

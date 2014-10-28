@@ -9163,6 +9163,11 @@ li {
   text-align: right;
 }
 
+.modal__cart_error {
+  padding: 15px;
+  border-radius: 3px;
+}
+
 .jumbotron {
   border: none;
   margin-bottom: 0;

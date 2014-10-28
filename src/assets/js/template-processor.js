@@ -85,7 +85,7 @@
 		fillModalTable: function(data) {
 
 			var templateIds = this._config.templateIds.modalCartTable;
-			return this._fillTemplate(templateIds, { items: data });
+			return this._fillTemplate(templateIds, { items: data.items, contacts: data.contacts });
 		},
 
 		init: function(){

@@ -1,4 +1,4 @@
-;(function(namespace) {
+;(function(ns) {
 
 	var d = document,
 	_private = {
@@ -47,15 +47,45 @@
 
 		raiseCallbacks1Param: function (callbacks, param) {
 			_private.raiseCallbacks(callbacks, [param]);
-		}
-	},
+		},
 
-	ns = namespace || window;
+		validEmail: function(email) {
+			var pattern = /^([a-z0-9_\.-])+@[a-z0-9-]+\.([a-z]{2,4}\.)?[a-z]{2,4}$/i;
+			return pattern.test(email);
+		},
+
+		sendEmail: function(params) {
+
+			var contacts = params.contacts;
+
+			if (!_private.validEmail(contacts.email))
+				return params.done({ error: true, message: 'Неверный email' });
+
+			$.ajax({
+				url: '//basik.besaba.com/email/send.php',
+				type: 'POST',
+				data: { name: contacts.name, phone: contacts.phone, email: contacts.email, items: params.items },
+				crossDomain: true,
+/*				dataType: 'html',*/ //json
+				success: function(data) {
+					if (!params.done)
+						return;
+					params.done({ error: false, message: data.statusText});
+				},
+				error: function(data) {
+					if (!params.done)
+						return;
+					params.done({ error: true, message: data.statusText + ' (error code: ' + data.status + ')'  });
+				}
+			});
+		}
+	};
 
 	ns.jstools = {
 		subscribe: _private.addCallbackTo,
 		unsubscribe: _private.deleteCallbackFrom,
-		publish: _private.raiseCallbacks1Param
+		publish: _private.raiseCallbacks1Param,
+		sendEmail: _private.sendEmail
 	};
 
 }(window.basik || window));
