@@ -90,10 +90,18 @@
 				.on('click', '.modalcart__removepic', $.proxy(this._itemRemoveClick, this))
 				.on('change', '.modalcart__item_spiner-input', $.proxy(this._cartItemCountChange, this))
 				.on('click', '.modalcart__item_spiner', $.proxy(this._cartItemSpinnerClick, this))
-				.on('change', '.modal__cart_contacts-wrapper input', _.debounce($.proxy(this._cartContactsChange, this), 300));
+				.on('blur', '.modal__cart_contacts-wrapper input', _.debounce($.proxy(this._cartContactsChange, this), 300));
 
+			// Submit event:
 			var handleSubmitClick = $.proxy(this._cartHandleSubmitClick, this);
-			var debounceSubmitClick = _.debounce(handleSubmitClick, 3000, true);
+			var delayBeforeSubmit = 300; 		// This delay fix next bug: if user fill contact form and click submit, 
+												// last blur event on email input don't raise!
+			var delayBeforeNextSubmit = 3000; 	// this delay prevent accidental double-clicks on a "submit" button from firing a second time
+												// P.S.: Disable submit button is BAD PRACTICE!
+												// 		 User can send request and close his laptop.
+												// 		 And submit button will be disabled forever! =)
+			var debounceSubmitClick = _.debounce(_.debounce(handleSubmitClick, delayBeforeNextSubmit, true), delayBeforeSubmit);
+
 			this._holder.on('click', '[type=submit]', $.proxy(this._cartFormSubmitClick, this, debounceSubmitClick));
 		},
 
