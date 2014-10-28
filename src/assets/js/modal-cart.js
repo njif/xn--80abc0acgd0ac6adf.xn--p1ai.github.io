@@ -160,7 +160,7 @@
 		},
 
 		_cartHandleSubmitClick: function(event) {
-			$('.modal__cart_error').text('').addClass('hidden');
+			this._holder.find('.modal__cart_error').text('').addClass('hidden');
 
 			var $el = this._getTargetByEvent(event);
 
@@ -174,6 +174,8 @@
 
 			if (response.error)
 				return $('.modal__cart_error').text(response.message).removeClass('hidden');
+
+			this._holder.find('[type=submit]').addClass('hidden');
 
 			this._holder.find('.modal-body').html('<div class="modal__cart_body-empty"></div>').find('.modal__cart_body-empty').text(response.message);
 		},
