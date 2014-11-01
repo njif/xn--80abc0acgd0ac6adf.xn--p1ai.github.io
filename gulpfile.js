@@ -83,7 +83,8 @@ var config = {
 					'src/assets/js/goods-catalog.js',
 					'src/assets/js/modal-cart.js',
 					'src/assets/js/app.js',
-					'src/assets/js/main.js'
+					'src/assets/js/main.js',
+					'src/assets/js/yametrica-counter.js'
 				],
 				// config.js.bundles.development.dest
 				dest: 'assets/js',
